@@ -21,10 +21,15 @@ fig = go.Figure(
     data=[
         go.Scatter(
             x=[i for i in range(len(df.columns)-1)], 
-            y=df.select(df.filter(pl.col('time') == 1)).select(pl.exclude('time')).to_numpy()[0, :]
+            y=df.select(df.filter(pl.col('time') == 1)).select(pl.exclude('time')).to_numpy()[0, :],
         )
     ]
 )
+fig.update_layout(
+    xaxis_title='x [m]',
+    yaxis_title='water height [m]'
+)
+
 app.layout = dbc.Container(
     dbc.Col(
         dbc.Row(

@@ -1,4 +1,26 @@
+module fd_solver
+
+    implicit none
+
+    contains
+        !> Compute the finite difference between an array of points.
+        function finite_diff(x) result(dx)
+            ! Args
+            real, intent(in) :: x(:)
+            real :: dx(size(x))
+
+            ! Loc vars
+            integer :: i
+
+            i = size(x)
+            dx(1) = x(1) - x(i) ! Periodic condition
+            dx(2:i) = x(2:i) - x(1:i-1)
+        end function finite_diff
+end module fd_solver
+
 program tsunami
+
+    use fd_solver, only: finite_diff
 
     implicit none
 
@@ -20,16 +42,8 @@ program tsunami
     end do
     
     time_loop: do n = 1, num_timesteps
-        ! Calculate spatial changes in water height
-        dh(1) = h(1) - h(grid_size) ! Periodic condition
-        do concurrent (i = 2:grid_size)
-            dh(i) = h(i) - h(i - 1)
-        end do
-
         ! Update water height for timestep
-        do concurrent (i = 1:grid_size)
-            h(i) = h(i) - (c*dh(i)/dx)*dt
-        end do
+        h = h - (c*finite_diff(h)/dx)*dt
 
         print *, n, h
     end do time_loop

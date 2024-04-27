@@ -6,5 +6,7 @@ FFLAGS=-O3
 
 $(shell mkdir -p $(BIN))
 
-tsunami: $(SRC)/*.f90
-	$(FC) $(FFLAGS) $< -o $(BIN)/$@
+tsunami:
+	$(FC) $(FFLAGS) -c $(SRC)/tsunami.f90 -I $(BIN) -J $(BIN)
+	$(FC) *.o -o $(BIN)/tsunami
+	rm tsunami.o
