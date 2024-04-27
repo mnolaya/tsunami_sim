@@ -7,6 +7,8 @@ import plotly.graph_objs as go
 
 import polars as pl
 
+app = Dash(__name__, external_stylesheets=[dbc.themes.MATERIA])
+
 DATA = 'tsunami_out.txt'
 with open(DATA, 'r') as f:
     p = re.compile(r'\s+')
@@ -15,7 +17,6 @@ headers = ['time'] + [f'x_{i+1}' for i, _ in enumerate(data[0].split(',')[1:])]
 data.insert(0, ','.join(headers))
 df = pl.read_csv(io.StringIO('\n'.join(data)))
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 fig = go.Figure(
     data=[
@@ -49,18 +50,24 @@ def create_fig(time: float = 1) -> go.Figure:
     Input('slider', 'value')
 )
 def set_fig_time(time):
-    print(time)
     return create_fig(time)
 
 app.layout = dbc.Container(
-    dbc.Row(
-        dbc.Col(
-            [
-                dcc.Graph(id='fig', figure=fig),
-                dcc.Slider(id='slider', value=min_time, min=min_time, max=max_time, marks=slider_marks)
-            ]
+    [    
+        dbc.Row(
+            dbc.Col(
+                dcc.Markdown('Tsunami simulator', className='h1 text-center')
+            )
+        ),
+        dbc.Row(
+            dbc.Col(
+                [
+                    dcc.Graph(id='fig', figure=fig),
+                    dcc.Slider(id='slider', value=min_time, min=min_time, max=max_time, marks=slider_marks, step=None, updatemode='drag')
+                ]
+            )
         )
-    )
+    ]
 )
 
 if __name__ == '__main__':
