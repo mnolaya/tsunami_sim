@@ -1,10 +1,12 @@
 module fd_solver
 
+    use, intrinsic :: iso_fortran_env, only: r64 => real64
+
     implicit none
 
     type :: SimParams
         integer :: icenter, grid_size, timesteps
-        real :: dt, dx, c, decay
+        real(r64) :: dt, dx, c, decay
         contains
             procedure, pass :: validate => validate_sim_params
     end type SimParams
@@ -18,7 +20,7 @@ module fd_solver
         function init_sim_params(icenter, grid_size, timesteps, dt, dx, c, decay) result(self)
             ! Args
             integer, intent(in) :: icenter, grid_size, timesteps
-            real, intent(in) :: dt, dx, c, decay
+            real(r64), intent(in) :: dt, dx, c, decay
             type(SimParams) :: self
 
             self%icenter = icenter
@@ -44,8 +46,8 @@ module fd_solver
         !> Compute the finite difference between an array of points.
         function finite_diff(x) result(dx)
             ! Args
-            real, intent(in) :: x(:)
-            real :: dx(size(x))
+            real(r64), intent(in) :: x(:)
+            real(r64) :: dx(size(x))
 
             ! Loc vars
             integer :: i
@@ -56,52 +58,55 @@ module fd_solver
         end function finite_diff
 
         !> Run solver
-        subroutine run_solver(sim_params)
+        subroutine run_solver(sim_params, h)
             ! Args
             type(SimParams), intent(in) :: sim_params
+            real(r64), allocatable, intent(out) :: h(:, :)
 
             ! Loc vars
             integer :: i, n
-            real, allocatable :: h(:), dh(:)
+            real(r64), allocatable :: dh(:)
 
-            allocate(h(sim_params%grid_size))
+            allocate(h(sim_params%grid_size, sim_params%timesteps + 1))
             allocate(dh(sim_params%grid_size))
 
             ! Initialize water height at t = 0
             do concurrent (i = 1:sim_params%grid_size)
-                h(i) = exp(-sim_params%decay*(i - sim_params%icenter)**2)
+                h(i, 1) = exp(-sim_params%decay*(i - sim_params%icenter)**2)
             end do
-            
+
             time_loop: do n = 1, sim_params%timesteps
                 ! Update water height for timestep
-                h = h - (sim_params%c*finite_diff(h)/sim_params%dx)*sim_params%dt
-
-                print *, n, h
+                h(:, n + 1) = h(:, n) - (sim_params%c*finite_diff(h(:, n))/sim_params%dx)*sim_params%dt
             end do time_loop
         end subroutine run_solver
 end module fd_solver
 
 module py_iface
 
-    use, intrinsic :: iso_c_binding, only: c_int, c_float
+    use, intrinsic :: iso_fortran_env, only: r64 => real64
+    use, intrinsic :: iso_c_binding, only: c_int, c_double
     use fd_solver, only: SimParams, run_solver
 
     implicit none
 
     contains
-        subroutine c_run_solver(icenter, grid_size, timesteps, dt, dx, c, decay) bind(c)
+        subroutine c_run_solver(icenter, grid_size, timesteps, dt, dx, c, decay, h) bind(c)
             ! Args
             integer(c_int), intent(in) :: icenter, grid_size, timesteps
-            real(c_float), intent(in) :: dt, dx, c, decay
+            real(c_double), intent(in) :: dt, dx, c, decay
+            real(c_double), intent(out) :: h(grid_size, timesteps + 1)
 
             ! Loc vars
+            real(r64), allocatable :: h_alloc(:, :)
             type(SimParams) :: sim_params
 
             ! Initialize SimParams type
             sim_params = SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
 
             ! Run solver
-            call run_solver(sim_params)
+            call run_solver(sim_params, h_alloc)
+            h = h_alloc
         end subroutine c_run_solver
 end module py_iface
 

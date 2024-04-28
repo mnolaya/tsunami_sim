@@ -14,8 +14,18 @@ from tsunami.bin.tsunami import Tsunami
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.MATERIA])
 
+def plot_sim_results(h) -> go.Figure:
+    fig = go.Figure(
+        data=go.Scatter(x=[i for i in range(h.shape[0])], y=h[:, 0])
+    )
+    fig.update_layout(
+        xaxis_title='x [m]',
+        yaxis_title='water height [m]'
+    )
+    return fig
+
 @callback(
-    Output('run-button', 'n_clicks'),
+    Output('results-fig', 'figure'),
     Input('run-button', 'n_clicks'),
     Input('inp-icenter', 'value'),
     Input('inp-grid_size', 'value'),
@@ -30,8 +40,8 @@ def run_simulation(n_clicks, icenter, grid_size, timesteps, dt, dx, c, decay):
         raise PreventUpdate
     else:
         solver = Tsunami()
-        solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
-        return n_clicks
+        h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
+        return plot_sim_results(h)
 
 # DATA = 'tsunami_out.txt'
 # with open(DATA, 'r') as f:
@@ -173,12 +183,11 @@ app.layout = dbc.Container(
         dbc.Row(
             dbc.Col(
                 [
-                    # dcc.Graph(id='fig', figure=fig),
+                    dcc.Graph(id='results-fig'),
                     # dcc.Slider(id='slider', value=min_time, min=min_time, max=max_time, marks=slider_marks, step=None, updatemode='drag')
                 ]
             )
         ),
-        dbc.Row(dbc.Placeholder(id='ph'))
     ]
 )
 
