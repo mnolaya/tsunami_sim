@@ -104,7 +104,7 @@ module py_iface
             ! Initialize SimParams type
             sim_params = SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
 
-            ! Run solver
+            ! Run solver and copy data to explicitly sized array for interfacing with C
             call run_solver(sim_params, h_alloc)
             h = h_alloc
         end subroutine c_run_solver

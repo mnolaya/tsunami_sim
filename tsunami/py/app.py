@@ -1,7 +1,7 @@
 import re
 import io
 
-from dash import Dash, dcc, Input, Output, callback
+from dash_extensions.enrich import DashProxy, Input, Output, State, TriggerTransform, Trigger, dcc, callback
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
@@ -9,14 +9,13 @@ import polars as pl
 
 # Load the shared object libraries for the tsunami simulator
 from tsunami.py import _env
-_env.load_so()
 from tsunami.bin.tsunami import Tsunami
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.MATERIA])
+app = DashProxy(__name__, external_stylesheets=[dbc.themes.MATERIA], transforms=[TriggerTransform()])
 
 def plot_sim_results(h) -> go.Figure:
     fig = go.Figure(
-        data=go.Scatter(x=[i for i in range(h.shape[0])], y=h[:, 0])
+        data=go.Scatter(x=[i+1 for i in range(h.shape[0])], y=h[:, 0])
     )
     fig.update_layout(
         xaxis_title='x [m]',
@@ -26,22 +25,25 @@ def plot_sim_results(h) -> go.Figure:
 
 @callback(
     Output('results-fig', 'figure'),
-    Input('run-button', 'n_clicks'),
-    Input('inp-icenter', 'value'),
-    Input('inp-grid_size', 'value'),
-    Input('inp-timesteps', 'value'),
-    Input('inp-dt', 'value'),
-    Input('inp-dx', 'value'),
-    Input('inp-c', 'value'),
-    Input('inp-decay', 'value'),
+    Trigger('run-button', 'n_clicks'),
+    # Input('run-button', 'n_clicks'),
+    State('inp-icenter', 'value'),
+    State('inp-grid_size', 'value'),
+    State('inp-timesteps', 'value'),
+    State('inp-dt', 'value'),
+    State('inp-dx', 'value'),
+    State('inp-c', 'value'),
+    State('inp-decay', 'value'),
+    prevent_initial_call=True
 )
-def run_simulation(n_clicks, icenter, grid_size, timesteps, dt, dx, c, decay):
-    if n_clicks is None:
-        raise PreventUpdate
-    else:
-        solver = Tsunami()
-        h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
-        return plot_sim_results(h)
+def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
+    # if n_clicks is None:
+    #     raise PreventUpdate
+    # else:
+    print('Running simulation!')
+    solver = Tsunami()
+    h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
+    return plot_sim_results(h)
 
 # DATA = 'tsunami_out.txt'
 # with open(DATA, 'r') as f:
