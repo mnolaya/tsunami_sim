@@ -1,19 +1,20 @@
-from setuptools import setup, Extension
+from setuptools import setup, find_packages, Extension
 
 from Cython.Build import cythonize
 import numpy as np
 
 extensions = [
     Extension(
-        "tsunami", ["fort/tsunami.pyx"],
-        include_dirs=[np.get_include(), "/home/mnolaya/repos/tsunami/bin", "/home/mnolaya/repos/tsunami/fort"],
+        "tsunami", ["tsunami/fort/tsunami.pyx"],
+        include_dirs=[np.get_include(), "tsunami/fort"],
         libraries=["tsunami"],
-        library_dirs=["/home/mnolaya/repos/tsunami/bin"],
+        library_dirs=["tsunami/bin"],
     )
 ]
 
-
 setup(
-    # name="test",
+    name="tsunami",
+    version="0.0.1",
+    packages=find_packages(),
     ext_modules=cythonize(extensions)
 )
