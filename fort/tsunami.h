@@ -1,0 +1,1 @@
+void c_run_solver(int *icenter, int *grid_size, int *timesteps, float *dt, float *dx, float *c, float *decay);

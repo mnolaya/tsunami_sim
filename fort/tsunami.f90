@@ -1,20 +1,3 @@
-! module py_iface
-
-!     use, intrinsic :: iso_c_binding, only: c_int, c_float
-
-!     implicit none
-
-
-!     ! contains
-!     !     ! function init_sim_params() bind(c)
-!     !     !     integer(c_int), intent(in) :: icenter, grid_size, timesteps
-!     !     !     real(c_float), intent(in) :: dt, dx, c, decay
-
-!     !     ! end function init_sim_params
-!     !     ! get_c 
-
-! end module py_iface
-
 module fd_solver
 
     implicit none
@@ -26,7 +9,27 @@ module fd_solver
             procedure, pass :: validate => validate_sim_params
     end type SimParams
 
+    interface SimParams
+        module procedure init_sim_params
+    end interface SimParams
+
     contains
+        !> SimParams constructor
+        function init_sim_params(icenter, grid_size, timesteps, dt, dx, c, decay) result(self)
+            ! Args
+            integer, intent(in) :: icenter, grid_size, timesteps
+            real, intent(in) :: dt, dx, c, decay
+            type(SimParams) :: self
+
+            self%icenter = icenter
+            self%grid_size = grid_size
+            self%timesteps = timesteps
+            self%dt = dt
+            self%dx = dx
+            self%c = c
+            self%decay = decay
+        end function init_sim_params
+
         !> Validate params
         subroutine validate_sim_params(self)
             ! Args
@@ -77,6 +80,30 @@ module fd_solver
             end do time_loop
         end subroutine run_solver
 end module fd_solver
+
+module py_iface
+
+    use, intrinsic :: iso_c_binding, only: c_int, c_float
+    use fd_solver, only: SimParams, run_solver
+
+    implicit none
+
+    contains
+        subroutine c_run_solver(icenter, grid_size, timesteps, dt, dx, c, decay) bind(c)
+            ! Args
+            integer(c_int), intent(in) :: icenter, grid_size, timesteps
+            real(c_float), intent(in) :: dt, dx, c, decay
+
+            ! Loc vars
+            type(SimParams) :: sim_params
+
+            ! Initialize SimParams type
+            sim_params = SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
+
+            ! Run solver
+            call run_solver(sim_params)
+        end subroutine c_run_solver
+end module py_iface
 
 ! program tsunami
 
