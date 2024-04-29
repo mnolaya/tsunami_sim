@@ -1,17 +1,18 @@
 import re
 import io
 
-from dash_extensions.enrich import DashProxy, Input, Output, State, TriggerTransform, Trigger, dcc, callback
+from dash_extensions.enrich import DashProxy, Input, Output, State, TriggerTransform, Trigger, dcc, callback, MultiplexerTransform
 from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
 import polars as pl
+import numpy as np
 
 # Load the shared object libraries for the tsunami simulator
 from tsunami.py import _env
 from tsunami.bin.tsunami import Tsunami
 
-app = DashProxy(__name__, external_stylesheets=[dbc.themes.MATERIA], transforms=[TriggerTransform()])
+app = DashProxy(__name__, external_stylesheets=[dbc.themes.MATERIA], transforms=[TriggerTransform(), MultiplexerTransform()])
 
 def plot_sim_results(h) -> go.Figure:
     fig = go.Figure(
@@ -24,9 +25,9 @@ def plot_sim_results(h) -> go.Figure:
     return fig
 
 @callback(
+    Output('results-store', 'data'),
     Output('results-fig', 'figure'),
     Trigger('run-button', 'n_clicks'),
-    # Input('run-button', 'n_clicks'),
     State('inp-icenter', 'value'),
     State('inp-grid_size', 'value'),
     State('inp-timesteps', 'value'),
@@ -37,21 +38,23 @@ def plot_sim_results(h) -> go.Figure:
     prevent_initial_call=True
 )
 def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
-    # if n_clicks is None:
-    #     raise PreventUpdate
-    # else:
     print('Running simulation!')
     solver = Tsunami()
     h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
-    return plot_sim_results(h)
+    return h, plot_sim_results(h)
 
-# DATA = 'tsunami_out.txt'
-# with open(DATA, 'r') as f:
-#     p = re.compile(r'\s+')
-#     data = [p.sub(',', l.lstrip().rstrip()) for l in f.readlines()]
-# headers = ['time'] + [f'x_{i+1}' for i, _ in enumerate(data[0].split(',')[1:])]
-# data.insert(0, ','.join(headers))
-# df = pl.read_csv(io.StringIO('\n'.join(data)))
+@callback(
+    Output('slider', 'marks'),
+    Output('slider', 'max'),
+    Trigger('run-button', 'n_clicks'),
+    State('inp-timesteps', 'value'),
+    State('inp-dt', 'value'),
+    prevent_initial_call=True
+)
+def set_slider(timesteps, dt):
+    max_val = timesteps*dt
+    marks = {dt*i: '' for i in range(timesteps)}
+    return marks, max_val
 
 # fig = go.Figure(
 #     data=[
@@ -80,15 +83,28 @@ def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
 #         ]
 #     )
 
-# @callback(
-#     Output('fig', 'figure'),
-#     Input('slider', 'value')
-# )
-# def set_fig_time(time):
-#     return create_fig(time)
+@callback(
+    Output('results-fig', 'figure'),
+    State('results-fig', 'figure'),
+    State('results-store', 'data'),
+    State('inp-dt', 'value'),
+    Input('slider', 'value'),
+    prevent_initial_call=True,
+)
+def set_fig_time(fig, h, dt, time):
+    time_idx = time/dt
+    h = np.array(h)
+    fig['data'][0].update({'y': h[:, int(time_idx)]})
+    # print(fig['data'])
+    return go.Figure(fig)
+    # return create_fig(time)
+
+# def get_slider_marks() -> dict[float, str]:
+#     return {time: '' for time in df.select(pl.col('time')).to_series()}
 
 app.layout = dbc.Container(
-    [    
+    [
+        dcc.Store(id='results-store', data=[]),    
         dbc.Row(
             dbc.Col(
                 dcc.Markdown('Tsunami simulator', className='h1 text-center')
@@ -186,7 +202,7 @@ app.layout = dbc.Container(
             dbc.Col(
                 [
                     dcc.Graph(id='results-fig'),
-                    # dcc.Slider(id='slider', value=min_time, min=min_time, max=max_time, marks=slider_marks, step=None, updatemode='drag')
+                    dcc.Slider(id='slider', min=0, max=1, step=None, updatemode='drag')
                 ]
             )
         ),
