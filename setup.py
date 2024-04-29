@@ -5,11 +5,11 @@ import numpy as np
 
 extensions = [
     Extension(
-        "tsunami_fort", ["tsunami/fort/tsunami.pyx"],
+        "tsunami_fort", ["tsunami/fort/tsunami.pyx"],  # Name of Python module to be created and source files to create module from
         include_dirs=[np.get_include(), "tsunami/fort"],
-        libraries=["tsunami"],
-        library_dirs=["tsunami/bin"],
-        runtime_library_dirs=["tsunami/bin"]
+        libraries=["tsunami"],  # Name of libraries to link
+        library_dirs=["tsunami/bin"],  #  Required for linking with other libraries
+        runtime_library_dirs=["tsunami/bin"]  # Required for dynamic (i.e., *.so or *.dll) linking at runtime with libraries built externally (e.g., gfortran)
     )
 ]
 
