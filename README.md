@@ -1,1 +1,49 @@
-# tsunami_sim
+# Tsunami simulator
+
+## Requirements
+
+- gfortran
+- make
+- Python 3.10+
+
+## Abstract
+
+This app is based upon the tsunami simulator project presented in the Milan Curcic's textbook, "Modern Fortran: Building efficient parallel applications." 
+
+## Installation
+
+Installation of the package must be performed in the following order:
+
+1. Build Fortran libraries
+2. Build Cython libraries for interfacing between Python and Fortran
+3. Install package to Python environment
+
+### Building Fortran libraries
+
+A Makefile is provided to aid in the build process. Simply run `make` in the command line, and the binaries will be compiled and placed in the correct bin directory for the package.
+
+### Building Cython libraries
+
+The Cython libraries are used to interface between Python and Fortran, thus allowing importing of procedures written in Fortran into a Python script. To install in the correct bin directory, run:
+
+```
+python setup.py build_ext -b tsunami/bin
+```
+
+### Install package to Python environment
+
+*Development only*
+
+```
+pip install -e .
+```
+
+## Running the app
+
+*Development only*
+
+If the package was installed in development mode (`-e` option), then the package must be run as a module to start the simulator app.
+
+```
+python -m tsunami.py.app
+```

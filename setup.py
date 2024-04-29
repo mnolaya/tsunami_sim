@@ -5,10 +5,11 @@ import numpy as np
 
 extensions = [
     Extension(
-        "tsunami", ["tsunami/fort/tsunami.pyx"],
+        "tsunami_fort", ["tsunami/fort/tsunami.pyx"],
         include_dirs=[np.get_include(), "tsunami/fort"],
         libraries=["tsunami"],
         library_dirs=["tsunami/bin"],
+        runtime_library_dirs=["tsunami/bin"]
     )
 ]
 
@@ -16,5 +17,5 @@ setup(
     name="tsunami",
     version="0.0.1",
     packages=find_packages(),
-    ext_modules=cythonize(extensions)
+    ext_modules=cythonize(extensions),
 )
