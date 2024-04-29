@@ -1,7 +1,7 @@
 import numpy as np
 from numpy cimport ndarray
 
-cdef extern from 'tsunami.h':
+cdef extern from 'tsunami_fort.h':
     cdef void c_run_solver(int *icenter, int *grid_size, int *timesteps, double *dt, double *dx, double *c, double *decay, double *h)
 
 cdef class Tsunami:

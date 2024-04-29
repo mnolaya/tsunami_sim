@@ -1,5 +1,6 @@
 import re
 import io
+import sys
 
 from dash_extensions.enrich import DashProxy, Input, Output, State, TriggerTransform, Trigger, dcc, callback, MultiplexerTransform
 from dash.exceptions import PreventUpdate
@@ -9,8 +10,7 @@ import polars as pl
 import numpy as np
 
 # Load the shared object libraries for the tsunami simulator
-from tsunami.py import _env
-from tsunami.bin.tsunami import Tsunami
+from tsunami.bin.tsunami_fort import Tsunami
 
 app = DashProxy(__name__, external_stylesheets=[dbc.themes.MATERIA], transforms=[TriggerTransform(), MultiplexerTransform()])
 

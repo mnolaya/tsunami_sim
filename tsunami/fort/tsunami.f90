@@ -44,7 +44,7 @@ module fd_solver
         end subroutine validate_sim_params
 
         !> Compute the finite difference between an array of points.
-        function finite_diff(x) result(dx)
+        function finit_diff_upwind(x) result(dx)
             ! Args
             real(r64), intent(in) :: x(:)
             real(r64) :: dx(size(x))
@@ -55,7 +55,23 @@ module fd_solver
             i = size(x)
             dx(1) = x(1) - x(i) ! Periodic condition
             dx(2:i) = x(2:i) - x(1:i-1)
-        end function finite_diff
+        end function finit_diff_upwind
+
+        !> Compute the finite difference between an array of points.
+        function finite_diff_center(x) result(dx)
+            ! Args
+            real(r64), intent(in) :: x(:)
+            real(r64) :: dx(size(x))
+
+            ! Loc vars
+            integer :: i
+
+            i = size(x)
+            dx(1) = x(2) - x(i)  ! Periodic condition (left)
+            dx(i) = x(1) - x(i - 1)  ! Periodic condition (right)
+            dx(2:i-1) = x(3:i) - x(1:i-2)  ! Internal nodes
+            dx = dx * 0.5_r64
+        end function finite_diff_center
 
         !> Run solver
         subroutine run_solver(sim_params, h)
@@ -64,20 +80,25 @@ module fd_solver
             real(r64), allocatable, intent(out) :: h(:, :)
 
             ! Loc vars
+            real(r64), parameter :: hmean = 10, g = 9.81
+
             integer :: i, n
-            real(r64), allocatable :: dh(:)
+            real(r64), allocatable :: dh(:), u(:)
 
             allocate(h(sim_params%grid_size, sim_params%timesteps + 1))
             allocate(dh(sim_params%grid_size))
+            allocate(u(sim_params%grid_size))
 
-            ! Initialize water height at t = 0
+            ! Initialize water height and velocity at t = 0
             do concurrent (i = 1:sim_params%grid_size)
                 h(i, 1) = exp(-sim_params%decay*(i - sim_params%icenter)**2)
             end do
+            u = 0
 
+            ! Update water height and velocity
             time_loop: do n = 1, sim_params%timesteps
-                ! Update water height for timestep
-                h(:, n + 1) = h(:, n) - (sim_params%c*finite_diff(h(:, n))/sim_params%dx)*sim_params%dt
+                u = u - ((u*finite_diff_center(u) + g*finite_diff_center(h(:, n)))/sim_params%dx) * sim_params%dt
+                h(:, n + 1) = h(:, n) - (finite_diff_center(u*(hmean + h(:, n)))/sim_params%dx)*sim_params%dt
             end do time_loop
         end subroutine run_solver
 end module fd_solver

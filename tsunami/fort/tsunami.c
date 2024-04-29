@@ -9,7 +9,7 @@
             "/home/mnolaya/miniconda3/envs/venv/lib/python3.12/site-packages/numpy/core/include/numpy/ndarrayobject.h",
             "/home/mnolaya/miniconda3/envs/venv/lib/python3.12/site-packages/numpy/core/include/numpy/ndarraytypes.h",
             "/home/mnolaya/miniconda3/envs/venv/lib/python3.12/site-packages/numpy/core/include/numpy/ufuncobject.h",
-            "tsunami/fort/tsunami.h"
+            "tsunami/fort/tsunami_fort.h"
         ],
         "include_dirs": [
             "tsunami/fort",
@@ -21,12 +21,15 @@
         "library_dirs": [
             "tsunami/bin"
         ],
-        "name": "tsunami",
+        "name": "tsunami_fort",
+        "runtime_library_dirs": [
+            "tsunami/bin"
+        ],
         "sources": [
             "tsunami/fort/tsunami.pyx"
         ]
     },
-    "module_name": "tsunami"
+    "module_name": "tsunami_fort"
 }
 END: Cython Metadata */
 
@@ -1246,8 +1249,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__tsunami
-#define __PYX_HAVE_API__tsunami
+#define __PYX_HAVE__tsunami_fort
+#define __PYX_HAVE_API__tsunami_fort
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -1259,7 +1262,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "numpy/ndarraytypes.h"
 #include "numpy/arrayscalars.h"
 #include "numpy/ufuncobject.h"
-#include "tsunami.h"
+#include "tsunami_fort.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -1776,7 +1779,7 @@ static CYTHON_INLINE __pyx_t_double_complex __pyx_t_double_complex_from_parts(do
 /* #### Code section: type_declarations ### */
 
 /*--- Type declarations ---*/
-struct __pyx_obj_7tsunami_Tsunami;
+struct __pyx_obj_12tsunami_fort_Tsunami;
 
 /* "../../miniconda3/envs/venv/lib/python3.12/site-packages/numpy/__init__.cython-30.pxd":767
  * ctypedef npy_longdouble longdouble_t
@@ -1814,14 +1817,14 @@ typedef npy_clongdouble __pyx_t_5numpy_clongdouble_t;
  */
 typedef npy_cdouble __pyx_t_5numpy_complex_t;
 
-/* "tsunami.pyx":7
+/* "tsunami/fort/tsunami.pyx":7
  *     cdef void c_run_solver(int *icenter, int *grid_size, int *timesteps, double *dt, double *dx, double *c, double *decay, double *h)
  * 
  * cdef class Tsunami:             # <<<<<<<<<<<<<<
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):
  *         cdef ndarray[dtype='double', ndim=2, mode='fortran'] h = np.empty((grid_size, timesteps + 1), dtype='double', order='F')
  */
-struct __pyx_obj_7tsunami_Tsunami {
+struct __pyx_obj_12tsunami_fort_Tsunami {
   PyObject_HEAD
 };
 
@@ -2253,13 +2256,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Tuple_Fast(PyObject *o, Py_ssize
 static PyObject *__Pyx_GetItemInt_Generic(PyObject *o, PyObject* j);
 static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i,
                                                      int is_list, int wraparound, int boundscheck);
-
-/* SetPackagePathFromImportLib.proto */
-#if PY_MAJOR_VERSION >= 3 && !CYTHON_PEP489_MULTI_PHASE_INIT
-static int __Pyx_SetPackagePathFromImportLib(PyObject *module_name);
-#else
-#define __Pyx_SetPackagePathFromImportLib(a) 0
-#endif
 
 /* IncludeStructmemberH.proto */
 #include <structmember.h>
@@ -2703,16 +2699,16 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__p
 
 /* Module declarations from "numpy" */
 
-/* Module declarations from "tsunami" */
-static PyObject *__pyx_f_7tsunami___pyx_unpickle_Tsunami__set_state(struct __pyx_obj_7tsunami_Tsunami *, PyObject *); /*proto*/
+/* Module declarations from "tsunami_fort" */
+static PyObject *__pyx_f_12tsunami_fort___pyx_unpickle_Tsunami__set_state(struct __pyx_obj_12tsunami_fort_Tsunami *, PyObject *); /*proto*/
 /* #### Code section: typeinfo ### */
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "tsunami"
-extern int __pyx_module_is_main_tsunami;
-int __pyx_module_is_main_tsunami = 0;
+#define __Pyx_MODULE_NAME "tsunami_fort"
+extern int __pyx_module_is_main_tsunami_fort;
+int __pyx_module_is_main_tsunami_fort = 0;
 
-/* Implementation of "tsunami" */
+/* Implementation of "tsunami_fort" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_ImportError;
 /* #### Code section: string_decls ### */
@@ -2749,7 +2745,6 @@ static const char __pyx_k_update[] = "update";
 static const char __pyx_k_Tsunami[] = "Tsunami";
 static const char __pyx_k_disable[] = "disable";
 static const char __pyx_k_icenter[] = "icenter";
-static const char __pyx_k_tsunami[] = "tsunami";
 static const char __pyx_k_getstate[] = "__getstate__";
 static const char __pyx_k_pyx_type[] = "__pyx_type";
 static const char __pyx_k_setstate[] = "__setstate__";
@@ -2766,6 +2761,7 @@ static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_pyx_checksum[] = "__pyx_checksum";
 static const char __pyx_k_stringsource[] = "<stringsource>";
+static const char __pyx_k_tsunami_fort[] = "tsunami_fort";
 static const char __pyx_k_use_setstate[] = "use_setstate";
 static const char __pyx_k_reduce_cython[] = "__reduce_cython__";
 static const char __pyx_k_asfortranarray[] = "asfortranarray";
@@ -2782,11 +2778,11 @@ static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multia
 static const char __pyx_k_Incompatible_checksums_0x_x_vs_0[] = "Incompatible checksums (0x%x vs (0xe3b0c44, 0xda39a3e, 0xd41d8cd) = ())";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __pyx_obj_7tsunami_Tsunami *__pyx_v_self, int __pyx_v_icenter, int __pyx_v_grid_size, int __pyx_v_timesteps, double __pyx_v_dt, double __pyx_v_dx, double __pyx_v_c, double __pyx_v_decay); /* proto */
-static PyObject *__pyx_pf_7tsunami_7Tsunami_2__reduce_cython__(struct __pyx_obj_7tsunami_Tsunami *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_7tsunami_7Tsunami_4__setstate_cython__(struct __pyx_obj_7tsunami_Tsunami *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_pf_7tsunami___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
-static PyObject *__pyx_tp_new_7tsunami_Tsunami(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
+static PyObject *__pyx_pf_12tsunami_fort_7Tsunami_run_solver(CYTHON_UNUSED struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v_self, int __pyx_v_icenter, int __pyx_v_grid_size, int __pyx_v_timesteps, double __pyx_v_dt, double __pyx_v_dx, double __pyx_v_c, double __pyx_v_decay); /* proto */
+static PyObject *__pyx_pf_12tsunami_fort_7Tsunami_2__reduce_cython__(struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_12tsunami_fort_7Tsunami_4__setstate_cython__(struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v_self, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_pf_12tsunami_fort___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state); /* proto */
+static PyObject *__pyx_tp_new_12tsunami_fort_Tsunami(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2849,9 +2845,9 @@ typedef struct {
   PyTypeObject *__pyx_ptype_5numpy_character;
   PyTypeObject *__pyx_ptype_5numpy_ufunc;
   #if CYTHON_USE_MODULE_STATE
-  PyObject *__pyx_type_7tsunami_Tsunami;
+  PyObject *__pyx_type_12tsunami_fort_Tsunami;
   #endif
-  PyTypeObject *__pyx_ptype_7tsunami_Tsunami;
+  PyTypeObject *__pyx_ptype_12tsunami_fort_Tsunami;
   PyObject *__pyx_n_s_F;
   PyObject *__pyx_n_s_ImportError;
   PyObject *__pyx_kp_s_Incompatible_checksums_0x_x_vs_0;
@@ -2913,8 +2909,7 @@ typedef struct {
   PyObject *__pyx_kp_s_stringsource;
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_timesteps;
-  PyObject *__pyx_n_s_tsunami;
-  PyObject *__pyx_n_u_tsunami;
+  PyObject *__pyx_n_s_tsunami_fort;
   PyObject *__pyx_kp_s_tsunami_fort_tsunami_pyx;
   PyObject *__pyx_n_s_update;
   PyObject *__pyx_n_s_use_setstate;
@@ -2990,8 +2985,8 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_flexible);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_character);
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
-  Py_CLEAR(clear_module_state->__pyx_ptype_7tsunami_Tsunami);
-  Py_CLEAR(clear_module_state->__pyx_type_7tsunami_Tsunami);
+  Py_CLEAR(clear_module_state->__pyx_ptype_12tsunami_fort_Tsunami);
+  Py_CLEAR(clear_module_state->__pyx_type_12tsunami_fort_Tsunami);
   Py_CLEAR(clear_module_state->__pyx_n_s_F);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Incompatible_checksums_0x_x_vs_0);
@@ -3053,8 +3048,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_s_stringsource);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_timesteps);
-  Py_CLEAR(clear_module_state->__pyx_n_s_tsunami);
-  Py_CLEAR(clear_module_state->__pyx_n_u_tsunami);
+  Py_CLEAR(clear_module_state->__pyx_n_s_tsunami_fort);
   Py_CLEAR(clear_module_state->__pyx_kp_s_tsunami_fort_tsunami_pyx);
   Py_CLEAR(clear_module_state->__pyx_n_s_update);
   Py_CLEAR(clear_module_state->__pyx_n_s_use_setstate);
@@ -3108,8 +3102,8 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_flexible);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_character);
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
-  Py_VISIT(traverse_module_state->__pyx_ptype_7tsunami_Tsunami);
-  Py_VISIT(traverse_module_state->__pyx_type_7tsunami_Tsunami);
+  Py_VISIT(traverse_module_state->__pyx_ptype_12tsunami_fort_Tsunami);
+  Py_VISIT(traverse_module_state->__pyx_type_12tsunami_fort_Tsunami);
   Py_VISIT(traverse_module_state->__pyx_n_s_F);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Incompatible_checksums_0x_x_vs_0);
@@ -3171,8 +3165,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_s_stringsource);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_timesteps);
-  Py_VISIT(traverse_module_state->__pyx_n_s_tsunami);
-  Py_VISIT(traverse_module_state->__pyx_n_u_tsunami);
+  Py_VISIT(traverse_module_state->__pyx_n_s_tsunami_fort);
   Py_VISIT(traverse_module_state->__pyx_kp_s_tsunami_fort_tsunami_pyx);
   Py_VISIT(traverse_module_state->__pyx_n_s_update);
   Py_VISIT(traverse_module_state->__pyx_n_s_use_setstate);
@@ -3253,9 +3246,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_ptype_5numpy_character __pyx_mstate_global->__pyx_ptype_5numpy_character
 #define __pyx_ptype_5numpy_ufunc __pyx_mstate_global->__pyx_ptype_5numpy_ufunc
 #if CYTHON_USE_MODULE_STATE
-#define __pyx_type_7tsunami_Tsunami __pyx_mstate_global->__pyx_type_7tsunami_Tsunami
+#define __pyx_type_12tsunami_fort_Tsunami __pyx_mstate_global->__pyx_type_12tsunami_fort_Tsunami
 #endif
-#define __pyx_ptype_7tsunami_Tsunami __pyx_mstate_global->__pyx_ptype_7tsunami_Tsunami
+#define __pyx_ptype_12tsunami_fort_Tsunami __pyx_mstate_global->__pyx_ptype_12tsunami_fort_Tsunami
 #define __pyx_n_s_F __pyx_mstate_global->__pyx_n_s_F
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
 #define __pyx_kp_s_Incompatible_checksums_0x_x_vs_0 __pyx_mstate_global->__pyx_kp_s_Incompatible_checksums_0x_x_vs_0
@@ -3317,8 +3310,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_s_stringsource __pyx_mstate_global->__pyx_kp_s_stringsource
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_timesteps __pyx_mstate_global->__pyx_n_s_timesteps
-#define __pyx_n_s_tsunami __pyx_mstate_global->__pyx_n_s_tsunami
-#define __pyx_n_u_tsunami __pyx_mstate_global->__pyx_n_u_tsunami
+#define __pyx_n_s_tsunami_fort __pyx_mstate_global->__pyx_n_s_tsunami_fort
 #define __pyx_kp_s_tsunami_fort_tsunami_pyx __pyx_mstate_global->__pyx_kp_s_tsunami_fort_tsunami_pyx
 #define __pyx_n_s_update __pyx_mstate_global->__pyx_n_s_update
 #define __pyx_n_s_use_setstate __pyx_mstate_global->__pyx_n_s_use_setstate
@@ -4600,7 +4592,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "tsunami.pyx":8
+/* "tsunami/fort/tsunami.pyx":8
  * 
  * cdef class Tsunami:
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):             # <<<<<<<<<<<<<<
@@ -4609,15 +4601,15 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7tsunami_7Tsunami_1run_solver(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_12tsunami_fort_7Tsunami_1run_solver(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7tsunami_7Tsunami_1run_solver = {"run_solver", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_7Tsunami_1run_solver, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7tsunami_7Tsunami_1run_solver(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_12tsunami_fort_7Tsunami_1run_solver = {"run_solver", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_7Tsunami_1run_solver, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_12tsunami_fort_7Tsunami_1run_solver(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4777,11 +4769,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("tsunami.Tsunami.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.Tsunami.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7tsunami_7Tsunami_run_solver(((struct __pyx_obj_7tsunami_Tsunami *)__pyx_v_self), __pyx_v_icenter, __pyx_v_grid_size, __pyx_v_timesteps, __pyx_v_dt, __pyx_v_dx, __pyx_v_c, __pyx_v_decay);
+  __pyx_r = __pyx_pf_12tsunami_fort_7Tsunami_run_solver(((struct __pyx_obj_12tsunami_fort_Tsunami *)__pyx_v_self), __pyx_v_icenter, __pyx_v_grid_size, __pyx_v_timesteps, __pyx_v_dt, __pyx_v_dx, __pyx_v_c, __pyx_v_decay);
 
   /* function exit code */
   {
@@ -4794,7 +4786,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __pyx_obj_7tsunami_Tsunami *__pyx_v_self, int __pyx_v_icenter, int __pyx_v_grid_size, int __pyx_v_timesteps, double __pyx_v_dt, double __pyx_v_dx, double __pyx_v_c, double __pyx_v_decay) {
+static PyObject *__pyx_pf_12tsunami_fort_7Tsunami_run_solver(CYTHON_UNUSED struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v_self, int __pyx_v_icenter, int __pyx_v_grid_size, int __pyx_v_timesteps, double __pyx_v_dt, double __pyx_v_dx, double __pyx_v_c, double __pyx_v_decay) {
   PyArrayObject *__pyx_v_h = 0;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_h;
   __Pyx_Buffer __pyx_pybuffer_h;
@@ -4817,7 +4809,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __py
   __pyx_pybuffernd_h.data = NULL;
   __pyx_pybuffernd_h.rcbuffer = &__pyx_pybuffer_h;
 
-  /* "tsunami.pyx":9
+  /* "tsunami/fort/tsunami.pyx":9
  * cdef class Tsunami:
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):
  *         cdef ndarray[dtype='double', ndim=2, mode='fortran'] h = np.empty((grid_size, timesteps + 1), dtype='double', order='F')             # <<<<<<<<<<<<<<
@@ -4869,7 +4861,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __py
   __pyx_v_h = ((PyArrayObject *)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "tsunami.pyx":10
+  /* "tsunami/fort/tsunami.pyx":10
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):
  *         cdef ndarray[dtype='double', ndim=2, mode='fortran'] h = np.empty((grid_size, timesteps + 1), dtype='double', order='F')
  *         c_run_solver(&icenter, &grid_size, &timesteps, &dt, &dx, &c, &decay, &h[0, 0])             # <<<<<<<<<<<<<<
@@ -4892,7 +4884,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __py
   }
   c_run_solver((&__pyx_v_icenter), (&__pyx_v_grid_size), (&__pyx_v_timesteps), (&__pyx_v_dt), (&__pyx_v_dx), (&__pyx_v_c), (&__pyx_v_decay), (&(*__Pyx_BufPtrFortranContig2d(double *, __pyx_pybuffernd_h.rcbuffer->pybuffer.buf, __pyx_t_6, __pyx_pybuffernd_h.diminfo[0].strides, __pyx_t_7, __pyx_pybuffernd_h.diminfo[1].strides))));
 
-  /* "tsunami.pyx":11
+  /* "tsunami/fort/tsunami.pyx":11
  *         cdef ndarray[dtype='double', ndim=2, mode='fortran'] h = np.empty((grid_size, timesteps + 1), dtype='double', order='F')
  *         c_run_solver(&icenter, &grid_size, &timesteps, &dt, &dx, &c, &decay, &h[0, 0])
  *         return np.asfortranarray(h)             # <<<<<<<<<<<<<<
@@ -4929,7 +4921,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __py
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tsunami.pyx":8
+  /* "tsunami/fort/tsunami.pyx":8
  * 
  * cdef class Tsunami:
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):             # <<<<<<<<<<<<<<
@@ -4949,7 +4941,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __py
     __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
-  __Pyx_AddTraceback("tsunami.Tsunami.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.Tsunami.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   goto __pyx_L2;
   __pyx_L0:;
@@ -4968,15 +4960,15 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_run_solver(CYTHON_UNUSED struct __py
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7tsunami_7Tsunami_3__reduce_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_12tsunami_fort_7Tsunami_3__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7tsunami_7Tsunami_3__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_7Tsunami_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7tsunami_7Tsunami_3__reduce_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_12tsunami_fort_7Tsunami_3__reduce_cython__ = {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_7Tsunami_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_12tsunami_fort_7Tsunami_3__reduce_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5001,14 +4993,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   if (unlikely(__pyx_nargs > 0)) {
     __Pyx_RaiseArgtupleInvalid("__reduce_cython__", 1, 0, 0, __pyx_nargs); return NULL;}
   if (unlikely(__pyx_kwds) && __Pyx_NumKwargs_FASTCALL(__pyx_kwds) && unlikely(!__Pyx_CheckKeywordStrings(__pyx_kwds, "__reduce_cython__", 0))) return NULL;
-  __pyx_r = __pyx_pf_7tsunami_7Tsunami_2__reduce_cython__(((struct __pyx_obj_7tsunami_Tsunami *)__pyx_v_self));
+  __pyx_r = __pyx_pf_12tsunami_fort_7Tsunami_2__reduce_cython__(((struct __pyx_obj_12tsunami_fort_Tsunami *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7tsunami_7Tsunami_2__reduce_cython__(struct __pyx_obj_7tsunami_Tsunami *__pyx_v_self) {
+static PyObject *__pyx_pf_12tsunami_fort_7Tsunami_2__reduce_cython__(struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v_self) {
   PyObject *__pyx_v_state = 0;
   PyObject *__pyx_v__dict = 0;
   int __pyx_v_use_setstate;
@@ -5204,7 +5196,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_2__reduce_cython__(struct __pyx_obj_
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("tsunami.Tsunami.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.Tsunami.__reduce_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_state);
@@ -5222,15 +5214,15 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_2__reduce_cython__(struct __pyx_obj_
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7tsunami_7Tsunami_5__setstate_cython__(PyObject *__pyx_v_self, 
+static PyObject *__pyx_pw_12tsunami_fort_7Tsunami_5__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7tsunami_7Tsunami_5__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_7Tsunami_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7tsunami_7Tsunami_5__setstate_cython__(PyObject *__pyx_v_self, 
+static PyMethodDef __pyx_mdef_12tsunami_fort_7Tsunami_5__setstate_cython__ = {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_7Tsunami_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_12tsunami_fort_7Tsunami_5__setstate_cython__(PyObject *__pyx_v_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5300,11 +5292,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("tsunami.Tsunami.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.Tsunami.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7tsunami_7Tsunami_4__setstate_cython__(((struct __pyx_obj_7tsunami_Tsunami *)__pyx_v_self), __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_12tsunami_fort_7Tsunami_4__setstate_cython__(((struct __pyx_obj_12tsunami_fort_Tsunami *)__pyx_v_self), __pyx_v___pyx_state);
 
   /* function exit code */
   {
@@ -5317,7 +5309,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7tsunami_7Tsunami_4__setstate_cython__(struct __pyx_obj_7tsunami_Tsunami *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_12tsunami_fort_7Tsunami_4__setstate_cython__(struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v_self, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -5332,7 +5324,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_4__setstate_cython__(struct __pyx_ob
  *     __pyx_unpickle_Tsunami__set_state(self, __pyx_state)             # <<<<<<<<<<<<<<
  */
   if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_v___pyx_state))) __PYX_ERR(2, 17, __pyx_L1_error)
-  __pyx_t_1 = __pyx_f_7tsunami___pyx_unpickle_Tsunami__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_12tsunami_fort___pyx_unpickle_Tsunami__set_state(__pyx_v_self, ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
@@ -5348,7 +5340,7 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_4__setstate_cython__(struct __pyx_ob
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_AddTraceback("tsunami.Tsunami.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.Tsunami.__setstate_cython__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5363,15 +5355,15 @@ static PyObject *__pyx_pf_7tsunami_7Tsunami_4__setstate_cython__(struct __pyx_ob
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7tsunami_1__pyx_unpickle_Tsunami(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_12tsunami_fort_1__pyx_unpickle_Tsunami(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_7tsunami_1__pyx_unpickle_Tsunami = {"__pyx_unpickle_Tsunami", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_1__pyx_unpickle_Tsunami, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7tsunami_1__pyx_unpickle_Tsunami(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_12tsunami_fort_1__pyx_unpickle_Tsunami = {"__pyx_unpickle_Tsunami", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_1__pyx_unpickle_Tsunami, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_12tsunami_fort_1__pyx_unpickle_Tsunami(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5471,11 +5463,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("tsunami.__pyx_unpickle_Tsunami", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.__pyx_unpickle_Tsunami", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7tsunami___pyx_unpickle_Tsunami(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
+  __pyx_r = __pyx_pf_12tsunami_fort___pyx_unpickle_Tsunami(__pyx_self, __pyx_v___pyx_type, __pyx_v___pyx_checksum, __pyx_v___pyx_state);
 
   /* function exit code */
   {
@@ -5488,7 +5480,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7tsunami___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_pf_12tsunami_fort___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v___pyx_type, long __pyx_v___pyx_checksum, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_v___pyx_PickleError = 0;
   PyObject *__pyx_v___pyx_result = 0;
   PyObject *__pyx_r = NULL;
@@ -5570,7 +5562,7 @@ static PyObject *__pyx_pf_7tsunami___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject
  *     if __pyx_state is not None:
  *         __pyx_unpickle_Tsunami__set_state(<Tsunami> __pyx_result, __pyx_state)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_7tsunami_Tsunami), __pyx_n_s_new); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 7, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(((PyObject *)__pyx_ptype_12tsunami_fort_Tsunami), __pyx_n_s_new); if (unlikely(!__pyx_t_3)) __PYX_ERR(2, 7, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_4 = NULL;
   __pyx_t_5 = 0;
@@ -5615,7 +5607,7 @@ static PyObject *__pyx_pf_7tsunami___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject
  * cdef __pyx_unpickle_Tsunami__set_state(Tsunami __pyx_result, tuple __pyx_state):
  */
     if (!(likely(PyTuple_CheckExact(__pyx_v___pyx_state))||((__pyx_v___pyx_state) == Py_None) || __Pyx_RaiseUnexpectedTypeError("tuple", __pyx_v___pyx_state))) __PYX_ERR(2, 9, __pyx_L1_error)
-    __pyx_t_1 = __pyx_f_7tsunami___pyx_unpickle_Tsunami__set_state(((struct __pyx_obj_7tsunami_Tsunami *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 9, __pyx_L1_error)
+    __pyx_t_1 = __pyx_f_12tsunami_fort___pyx_unpickle_Tsunami__set_state(((struct __pyx_obj_12tsunami_fort_Tsunami *)__pyx_v___pyx_result), ((PyObject*)__pyx_v___pyx_state)); if (unlikely(!__pyx_t_1)) __PYX_ERR(2, 9, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
@@ -5651,7 +5643,7 @@ static PyObject *__pyx_pf_7tsunami___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
-  __Pyx_AddTraceback("tsunami.__pyx_unpickle_Tsunami", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.__pyx_unpickle_Tsunami", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v___pyx_PickleError);
@@ -5669,7 +5661,7 @@ static PyObject *__pyx_pf_7tsunami___pyx_unpickle_Tsunami(CYTHON_UNUSED PyObject
  *         __pyx_result.__dict__.update(__pyx_state[0])
  */
 
-static PyObject *__pyx_f_7tsunami___pyx_unpickle_Tsunami__set_state(struct __pyx_obj_7tsunami_Tsunami *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
+static PyObject *__pyx_f_12tsunami_fort___pyx_unpickle_Tsunami__set_state(struct __pyx_obj_12tsunami_fort_Tsunami *__pyx_v___pyx_result, PyObject *__pyx_v___pyx_state) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   int __pyx_t_1;
@@ -5772,7 +5764,7 @@ static PyObject *__pyx_f_7tsunami___pyx_unpickle_Tsunami__set_state(struct __pyx
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("tsunami.__pyx_unpickle_Tsunami__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami_fort.__pyx_unpickle_Tsunami__set_state", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = 0;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -5780,7 +5772,7 @@ static PyObject *__pyx_f_7tsunami___pyx_unpickle_Tsunami__set_state(struct __pyx
   return __pyx_r;
 }
 
-static PyObject *__pyx_tp_new_7tsunami_Tsunami(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
+static PyObject *__pyx_tp_new_12tsunami_fort_Tsunami(PyTypeObject *t, CYTHON_UNUSED PyObject *a, CYTHON_UNUSED PyObject *k) {
   PyObject *o;
   #if CYTHON_COMPILING_IN_LIMITED_API
   allocfunc alloc_func = (allocfunc)PyType_GetSlot(t, Py_tp_alloc);
@@ -5796,10 +5788,10 @@ static PyObject *__pyx_tp_new_7tsunami_Tsunami(PyTypeObject *t, CYTHON_UNUSED Py
   return o;
 }
 
-static void __pyx_tp_dealloc_7tsunami_Tsunami(PyObject *o) {
+static void __pyx_tp_dealloc_12tsunami_fort_Tsunami(PyObject *o) {
   #if CYTHON_USE_TP_FINALIZE
   if (unlikely((PY_VERSION_HEX >= 0x03080000 || __Pyx_PyType_HasFeature(Py_TYPE(o), Py_TPFLAGS_HAVE_FINALIZE)) && __Pyx_PyObject_GetSlot(o, tp_finalize, destructor)) && (!PyType_IS_GC(Py_TYPE(o)) || !__Pyx_PyObject_GC_IsFinalized(o))) {
-    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_7tsunami_Tsunami) {
+    if (__Pyx_PyObject_GetSlot(o, tp_dealloc, destructor) == __pyx_tp_dealloc_12tsunami_fort_Tsunami) {
       if (PyObject_CallFinalizerFromDealloc(o)) return;
     }
   }
@@ -5814,34 +5806,34 @@ static void __pyx_tp_dealloc_7tsunami_Tsunami(PyObject *o) {
   #endif
 }
 
-static PyMethodDef __pyx_methods_7tsunami_Tsunami[] = {
-  {"run_solver", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_7Tsunami_1run_solver, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_7Tsunami_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
-  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_7Tsunami_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+static PyMethodDef __pyx_methods_12tsunami_fort_Tsunami[] = {
+  {"run_solver", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_7Tsunami_1run_solver, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__reduce_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_7Tsunami_3__reduce_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
+  {"__setstate_cython__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_7Tsunami_5__setstate_cython__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0},
   {0, 0, 0, 0}
 };
 #if CYTHON_USE_TYPE_SPECS
-static PyType_Slot __pyx_type_7tsunami_Tsunami_slots[] = {
-  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_7tsunami_Tsunami},
-  {Py_tp_methods, (void *)__pyx_methods_7tsunami_Tsunami},
-  {Py_tp_new, (void *)__pyx_tp_new_7tsunami_Tsunami},
+static PyType_Slot __pyx_type_12tsunami_fort_Tsunami_slots[] = {
+  {Py_tp_dealloc, (void *)__pyx_tp_dealloc_12tsunami_fort_Tsunami},
+  {Py_tp_methods, (void *)__pyx_methods_12tsunami_fort_Tsunami},
+  {Py_tp_new, (void *)__pyx_tp_new_12tsunami_fort_Tsunami},
   {0, 0},
 };
-static PyType_Spec __pyx_type_7tsunami_Tsunami_spec = {
-  "tsunami.Tsunami",
-  sizeof(struct __pyx_obj_7tsunami_Tsunami),
+static PyType_Spec __pyx_type_12tsunami_fort_Tsunami_spec = {
+  "tsunami_fort.Tsunami",
+  sizeof(struct __pyx_obj_12tsunami_fort_Tsunami),
   0,
   Py_TPFLAGS_DEFAULT|Py_TPFLAGS_HAVE_VERSION_TAG|Py_TPFLAGS_CHECKTYPES|Py_TPFLAGS_HAVE_NEWBUFFER|Py_TPFLAGS_BASETYPE,
-  __pyx_type_7tsunami_Tsunami_slots,
+  __pyx_type_12tsunami_fort_Tsunami_slots,
 };
 #else
 
-static PyTypeObject __pyx_type_7tsunami_Tsunami = {
+static PyTypeObject __pyx_type_12tsunami_fort_Tsunami = {
   PyVarObject_HEAD_INIT(0, 0)
-  "tsunami.""Tsunami", /*tp_name*/
-  sizeof(struct __pyx_obj_7tsunami_Tsunami), /*tp_basicsize*/
+  "tsunami_fort.""Tsunami", /*tp_name*/
+  sizeof(struct __pyx_obj_12tsunami_fort_Tsunami), /*tp_basicsize*/
   0, /*tp_itemsize*/
-  __pyx_tp_dealloc_7tsunami_Tsunami, /*tp_dealloc*/
+  __pyx_tp_dealloc_12tsunami_fort_Tsunami, /*tp_dealloc*/
   #if PY_VERSION_HEX < 0x030800b4
   0, /*tp_print*/
   #endif
@@ -5874,7 +5866,7 @@ static PyTypeObject __pyx_type_7tsunami_Tsunami = {
   0, /*tp_weaklistoffset*/
   0, /*tp_iter*/
   0, /*tp_iternext*/
-  __pyx_methods_7tsunami_Tsunami, /*tp_methods*/
+  __pyx_methods_12tsunami_fort_Tsunami, /*tp_methods*/
   0, /*tp_members*/
   0, /*tp_getset*/
   0, /*tp_base*/
@@ -5886,7 +5878,7 @@ static PyTypeObject __pyx_type_7tsunami_Tsunami = {
   #endif
   0, /*tp_init*/
   0, /*tp_alloc*/
-  __pyx_tp_new_7tsunami_Tsunami, /*tp_new*/
+  __pyx_tp_new_12tsunami_fort_Tsunami, /*tp_new*/
   0, /*tp_free*/
   0, /*tp_is_gc*/
   0, /*tp_bases*/
@@ -5995,8 +5987,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_s_stringsource, __pyx_k_stringsource, sizeof(__pyx_k_stringsource), 0, 0, 1, 0},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_timesteps, __pyx_k_timesteps, sizeof(__pyx_k_timesteps), 0, 0, 1, 1},
-    {&__pyx_n_s_tsunami, __pyx_k_tsunami, sizeof(__pyx_k_tsunami), 0, 0, 1, 1},
-    {&__pyx_n_u_tsunami, __pyx_k_tsunami, sizeof(__pyx_k_tsunami), 0, 1, 0, 1},
+    {&__pyx_n_s_tsunami_fort, __pyx_k_tsunami_fort, sizeof(__pyx_k_tsunami_fort), 0, 0, 1, 1},
     {&__pyx_kp_s_tsunami_fort_tsunami_pyx, __pyx_k_tsunami_fort_tsunami_pyx, sizeof(__pyx_k_tsunami_fort_tsunami_pyx), 0, 0, 1, 0},
     {&__pyx_n_s_update, __pyx_k_update, sizeof(__pyx_k_update), 0, 0, 1, 1},
     {&__pyx_n_s_use_setstate, __pyx_k_use_setstate, sizeof(__pyx_k_use_setstate), 0, 0, 1, 1},
@@ -6050,7 +6041,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "tsunami.pyx":8
+  /* "tsunami/fort/tsunami.pyx":8
  * 
  * cdef class Tsunami:
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):             # <<<<<<<<<<<<<<
@@ -6177,27 +6168,27 @@ static int __Pyx_modinit_type_init_code(void) {
   __Pyx_RefNannySetupContext("__Pyx_modinit_type_init_code", 0);
   /*--- Type init code ---*/
   #if CYTHON_USE_TYPE_SPECS
-  __pyx_ptype_7tsunami_Tsunami = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_7tsunami_Tsunami_spec, NULL); if (unlikely(!__pyx_ptype_7tsunami_Tsunami)) __PYX_ERR(1, 7, __pyx_L1_error)
-  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_7tsunami_Tsunami_spec, __pyx_ptype_7tsunami_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  __pyx_ptype_12tsunami_fort_Tsunami = (PyTypeObject *) __Pyx_PyType_FromModuleAndSpec(__pyx_m, &__pyx_type_12tsunami_fort_Tsunami_spec, NULL); if (unlikely(!__pyx_ptype_12tsunami_fort_Tsunami)) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (__Pyx_fix_up_extension_type_from_spec(&__pyx_type_12tsunami_fort_Tsunami_spec, __pyx_ptype_12tsunami_fort_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   #else
-  __pyx_ptype_7tsunami_Tsunami = &__pyx_type_7tsunami_Tsunami;
+  __pyx_ptype_12tsunami_fort_Tsunami = &__pyx_type_12tsunami_fort_Tsunami;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
   #endif
   #if !CYTHON_USE_TYPE_SPECS
-  if (__Pyx_PyType_Ready(__pyx_ptype_7tsunami_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (__Pyx_PyType_Ready(__pyx_ptype_12tsunami_fort_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   #endif
   #if PY_MAJOR_VERSION < 3
-  __pyx_ptype_7tsunami_Tsunami->tp_print = 0;
+  __pyx_ptype_12tsunami_fort_Tsunami->tp_print = 0;
   #endif
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_7tsunami_Tsunami->tp_dictoffset && __pyx_ptype_7tsunami_Tsunami->tp_getattro == PyObject_GenericGetAttr)) {
-    __pyx_ptype_7tsunami_Tsunami->tp_getattro = __Pyx_PyObject_GenericGetAttr;
+  if ((CYTHON_USE_TYPE_SLOTS && CYTHON_USE_PYTYPE_LOOKUP) && likely(!__pyx_ptype_12tsunami_fort_Tsunami->tp_dictoffset && __pyx_ptype_12tsunami_fort_Tsunami->tp_getattro == PyObject_GenericGetAttr)) {
+    __pyx_ptype_12tsunami_fort_Tsunami->tp_getattro = __Pyx_PyObject_GenericGetAttr;
   }
   #endif
-  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Tsunami, (PyObject *) __pyx_ptype_7tsunami_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (PyObject_SetAttr(__pyx_m, __pyx_n_s_Tsunami, (PyObject *) __pyx_ptype_12tsunami_fort_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   #if !CYTHON_COMPILING_IN_LIMITED_API
-  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_7tsunami_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
+  if (__Pyx_setup_reduce((PyObject *) __pyx_ptype_12tsunami_fort_Tsunami) < 0) __PYX_ERR(1, 7, __pyx_L1_error)
   #endif
   __Pyx_RefNannyFinishContext();
   return 0;
@@ -6272,10 +6263,10 @@ static int __Pyx_modinit_function_import_code(void) {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_tsunami(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_tsunami_fort(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_tsunami},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_tsunami_fort},
   {0, NULL}
 };
 #endif
@@ -6288,7 +6279,7 @@ namespace {
   #endif
   {
       PyModuleDef_HEAD_INIT,
-      "tsunami",
+      "tsunami_fort",
       0, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
@@ -6336,17 +6327,11 @@ namespace {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC inittsunami(void) CYTHON_SMALL_CODE; /*proto*/
-#if !defined(CYTHON_NO_PYINIT_EXPORT) && (defined(_WIN32) || defined(WIN32) || defined(MS_WINDOWS))
-__Pyx_PyMODINIT_FUNC init__init__(void) { inittsunami(); }
-#endif
-__Pyx_PyMODINIT_FUNC inittsunami(void)
+__Pyx_PyMODINIT_FUNC inittsunami_fort(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC inittsunami_fort(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_tsunami(void) CYTHON_SMALL_CODE; /*proto*/
-#if !defined(CYTHON_NO_PYINIT_EXPORT) && (defined(_WIN32) || defined(WIN32) || defined(MS_WINDOWS))
-__Pyx_PyMODINIT_FUNC PyInit___init__(void) { return PyInit_tsunami(); }
-#endif
-__Pyx_PyMODINIT_FUNC PyInit_tsunami(void)
+__Pyx_PyMODINIT_FUNC PyInit_tsunami_fort(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_tsunami_fort(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -6427,7 +6412,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami_fort(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -6444,7 +6429,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami(PyObject *__pyx_pyinit_mod
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'tsunami' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'tsunami_fort' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -6456,13 +6441,13 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami(PyObject *__pyx_pyinit_mod
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("tsunami", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("tsunami_fort", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
-    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "tsunami" pseudovariable */
+    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "tsunami_fort" pseudovariable */
     if (unlikely((add_module_result < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
@@ -6486,7 +6471,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_tsunami(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_tsunami_fort(void)", 0);
   if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -6524,17 +6509,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_tsunami) {
+  if (__pyx_module_is_main_tsunami_fort) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
-  }
-  if (!CYTHON_PEP489_MULTI_PHASE_INIT) {
-    if (unlikely((__Pyx_SetPackagePathFromImportLib(__pyx_n_u_tsunami) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "tsunami")) {
-      if (unlikely((PyDict_SetItemString(modules, "tsunami", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "tsunami_fort")) {
+      if (unlikely((PyDict_SetItemString(modules, "tsunami_fort", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -6555,7 +6537,7 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_patch_abc() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
 
-  /* "tsunami.pyx":1
+  /* "tsunami/fort/tsunami.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * from numpy cimport ndarray
  * 
@@ -6565,29 +6547,29 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "tsunami.pyx":8
+  /* "tsunami/fort/tsunami.pyx":8
  * 
  * cdef class Tsunami:
  *     def run_solver(self, int icenter, int grid_size, int timesteps, double dt, double dx, double c, double decay):             # <<<<<<<<<<<<<<
  *         cdef ndarray[dtype='double', ndim=2, mode='fortran'] h = np.empty((grid_size, timesteps + 1), dtype='double', order='F')
  *         c_run_solver(&icenter, &grid_size, &timesteps, &dt, &dx, &c, &decay, &h[0, 0])
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_7Tsunami_1run_solver, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Tsunami_run_solver, NULL, __pyx_n_s_tsunami, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 8, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12tsunami_fort_7Tsunami_1run_solver, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Tsunami_run_solver, NULL, __pyx_n_s_tsunami_fort, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 8, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_7tsunami_Tsunami, __pyx_n_s_run_solver, __pyx_t_2) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_12tsunami_fort_Tsunami, __pyx_n_s_run_solver, __pyx_t_2) < 0) __PYX_ERR(1, 8, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  PyType_Modified(__pyx_ptype_7tsunami_Tsunami);
+  PyType_Modified(__pyx_ptype_12tsunami_fort_Tsunami);
 
   /* "(tree fragment)":1
  * def __reduce_cython__(self):             # <<<<<<<<<<<<<<
  *     cdef tuple state
  *     cdef object _dict
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_7Tsunami_3__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Tsunami___reduce_cython, NULL, __pyx_n_s_tsunami, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12tsunami_fort_7Tsunami_3__reduce_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Tsunami___reduce_cython, NULL, __pyx_n_s_tsunami_fort, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_7tsunami_Tsunami, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_12tsunami_fort_Tsunami, __pyx_n_s_reduce_cython, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  PyType_Modified(__pyx_ptype_7tsunami_Tsunami);
+  PyType_Modified(__pyx_ptype_12tsunami_fort_Tsunami);
 
   /* "(tree fragment)":16
  *     else:
@@ -6595,23 +6577,23 @@ if (!__Pyx_RefNanny) {
  * def __setstate_cython__(self, __pyx_state):             # <<<<<<<<<<<<<<
  *     __pyx_unpickle_Tsunami__set_state(self, __pyx_state)
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_7Tsunami_5__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Tsunami___setstate_cython, NULL, __pyx_n_s_tsunami, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 16, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12tsunami_fort_7Tsunami_5__setstate_cython__, __Pyx_CYFUNCTION_CCLASS, __pyx_n_s_Tsunami___setstate_cython, NULL, __pyx_n_s_tsunami_fort, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_7tsunami_Tsunami, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(2, 16, __pyx_L1_error)
+  if (__Pyx_SetItemOnTypeDict((PyObject *)__pyx_ptype_12tsunami_fort_Tsunami, __pyx_n_s_setstate_cython, __pyx_t_2) < 0) __PYX_ERR(2, 16, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  PyType_Modified(__pyx_ptype_7tsunami_Tsunami);
+  PyType_Modified(__pyx_ptype_12tsunami_fort_Tsunami);
 
   /* "(tree fragment)":1
  * def __pyx_unpickle_Tsunami(__pyx_type, long __pyx_checksum, __pyx_state):             # <<<<<<<<<<<<<<
  *     cdef object __pyx_PickleError
  *     cdef object __pyx_result
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_1__pyx_unpickle_Tsunami, 0, __pyx_n_s_pyx_unpickle_Tsunami, NULL, __pyx_n_s_tsunami, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12tsunami_fort_1__pyx_unpickle_Tsunami, 0, __pyx_n_s_pyx_unpickle_Tsunami, NULL, __pyx_n_s_tsunami_fort, __pyx_d, ((PyObject *)__pyx_codeobj__13)); if (unlikely(!__pyx_t_2)) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_pyx_unpickle_Tsunami, __pyx_t_2) < 0) __PYX_ERR(2, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "tsunami.pyx":1
+  /* "tsunami/fort/tsunami.pyx":1
  * import numpy as np             # <<<<<<<<<<<<<<
  * from numpy cimport ndarray
  * 
@@ -6628,7 +6610,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init tsunami", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init tsunami_fort", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -6642,7 +6624,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init tsunami");
+    PyErr_SetString(PyExc_ImportError, "init tsunami_fort");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();
@@ -8866,57 +8848,6 @@ static CYTHON_INLINE PyObject *__Pyx_GetItemInt_Fast(PyObject *o, Py_ssize_t i, 
 #endif
     return __Pyx_GetItemInt_Generic(o, PyInt_FromSsize_t(i));
 }
-
-/* SetPackagePathFromImportLib */
-  #if PY_MAJOR_VERSION >= 3 && !CYTHON_PEP489_MULTI_PHASE_INIT
-static int __Pyx_SetPackagePathFromImportLib(PyObject *module_name) {
-    PyObject *importlib, *osmod, *ossep, *parts, *package_path;
-    PyObject *file_path = NULL;
-    int result;
-    PyObject *spec;
-    importlib = PyImport_ImportModule("importlib.util");
-    if (unlikely(!importlib))
-        goto bad;
-    spec = PyObject_CallMethod(importlib, "find_spec", "(O)", module_name);
-    Py_DECREF(importlib);
-    if (unlikely(!spec))
-        goto bad;
-    file_path = PyObject_GetAttrString(spec, "origin");
-    Py_DECREF(spec);
-    if (unlikely(!file_path))
-        goto bad;
-    if (unlikely(PyObject_SetAttrString(__pyx_m, "__file__", file_path) < 0))
-        goto bad;
-    osmod = PyImport_ImportModule("os");
-    if (unlikely(!osmod))
-        goto bad;
-    ossep = PyObject_GetAttrString(osmod, "sep");
-    Py_DECREF(osmod);
-    if (unlikely(!ossep))
-        goto bad;
-    parts = PyObject_CallMethod(file_path, "rsplit", "(Oi)", ossep, 1);
-    Py_DECREF(file_path); file_path = NULL;
-    Py_DECREF(ossep);
-    if (unlikely(!parts))
-        goto bad;
-    package_path = Py_BuildValue("[O]", PyList_GET_ITEM(parts, 0));
-    Py_DECREF(parts);
-    if (unlikely(!package_path))
-        goto bad;
-    goto set_path;
-bad:
-    PyErr_WriteUnraisable(module_name);
-    Py_XDECREF(file_path);
-    PyErr_Clear();
-    package_path = PyList_New(0);
-    if (unlikely(!package_path))
-        return -1;
-set_path:
-    result = PyObject_SetAttrString(__pyx_m, "__path__", package_path);
-    Py_DECREF(package_path);
-    return result;
-}
-#endif
 
 /* FixUpExtensionType */
   #if CYTHON_USE_TYPE_SPECS
