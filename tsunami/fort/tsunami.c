@@ -19,11 +19,13 @@
             "tsunami"
         ],
         "library_dirs": [
-            "tsunami/bin"
+            "tsunami/bin",
+            "tsunami/fort"
         ],
         "name": "tsunami_fort",
         "runtime_library_dirs": [
-            "tsunami/bin"
+            "tsunami/bin",
+            "tsunami/fort"
         ],
         "sources": [
             "tsunami/fort/tsunami.pyx"

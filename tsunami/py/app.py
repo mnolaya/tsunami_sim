@@ -1,12 +1,6 @@
-import re
-import io
-import sys
-
 from dash_extensions.enrich import DashProxy, Input, Output, State, TriggerTransform, Trigger, dcc, callback, MultiplexerTransform
-from dash.exceptions import PreventUpdate
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
-import polars as pl
 import numpy as np
 
 # Load the shared object libraries for the tsunami simulator
@@ -15,12 +9,31 @@ from tsunami.bin.tsunami_fort import Tsunami
 app = DashProxy(__name__, external_stylesheets=[dbc.themes.MATERIA], transforms=[TriggerTransform(), MultiplexerTransform()])
 
 def plot_sim_results(h) -> go.Figure:
+    xdata = [i+1 for i in range(h.shape[0])]
     fig = go.Figure(
-        data=go.Scatter(x=[i+1 for i in range(h.shape[0])], y=h[:, 0])
-    )
-    fig.update_layout(
-        xaxis_title='x [m]',
-        yaxis_title='water height [m]'
+        data=go.Scatter(x=xdata, y=h[:, 0]),
+        layout=go.Layout(
+            xaxis_title='x [m]',
+            yaxis_title='water height [m]',
+            updatemenus=[
+                {
+                    'type': 'buttons',
+                    'buttons': [
+                        {
+                            'label': 'Play',
+                            'method': 'animate',
+                            'args': [None, {'frame': {'duration': 0, 'redraw': False}, 'mode': 'immediate', 'transition': {'duration': 0}, 'fromcurrent': True}]
+                        },
+                        {
+                            'label': 'Pause',
+                            'method': 'animate',
+                            'args': [None, {'frame': {'duration': 0, 'redraw': False}, 'mode': 'immediate', 'transition': {'duration': 0}}]
+                        },
+                    ]
+                }
+            ]
+        ),
+        frames=[go.Frame(data=go.Scatter(x=xdata, y=h[:, i])) for i in range(h.shape[1])]
     )
     return fig
 
@@ -38,50 +51,19 @@ def plot_sim_results(h) -> go.Figure:
     prevent_initial_call=True
 )
 def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
-    print('Running simulation!')
     solver = Tsunami()
     h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
     return h, plot_sim_results(h)
 
 @callback(
-    Output('slider', 'marks'),
     Output('slider', 'max'),
+    Output('slider', 'marks'),
     Trigger('run-button', 'n_clicks'),
     State('inp-timesteps', 'value'),
-    State('inp-dt', 'value'),
     prevent_initial_call=True
 )
-def set_slider(timesteps, dt):
-    max_val = timesteps*dt
-    marks = {dt*i: '' for i in range(timesteps)}
-    return marks, max_val
-
-# fig = go.Figure(
-#     data=[
-#         go.Scatter(
-#             x=[i for i in range(len(df.columns)-1)], 
-#             y=df.select(df.filter(pl.col('time') == 1)).select(pl.exclude('time')).to_numpy()[0, :],
-#         )
-#     ]
-# )
-# fig.update_layout(
-#     xaxis_title='x [m]',
-#     yaxis_title='water height [m]'
-# )
-
-# slider_marks = {time: '' for time in df.select(pl.col('time')).to_series()}
-# max_time = df.select(pl.col('time')).max().item()
-# min_time = df.select(pl.col('time')).min().item()
-
-# def create_fig(time: float = 1) -> go.Figure:
-#     return go.Figure(
-#         data=[
-#             go.Scatter(
-#                 x=[i for i in range(len(df.columns)-1)], 
-#                 y=df.select(df.filter(pl.col('time') == time)).select(pl.exclude('time')).to_numpy()[0, :],
-#             )
-#         ]
-#     )
+def set_slider(timesteps):
+    return timesteps, {i: '' for i in range(timesteps)}
 
 @callback(
     Output('results-fig', 'figure'),
@@ -91,16 +73,10 @@ def set_slider(timesteps, dt):
     Input('slider', 'value'),
     prevent_initial_call=True,
 )
-def set_fig_time(fig, h, dt, time):
-    time_idx = time/dt
+def set_fig_time(fig, h, dt, step):
     h = np.array(h)
-    fig['data'][0].update({'y': h[:, int(time_idx)]})
-    # print(fig['data'])
+    fig['data'][0].update({'y': h[:, int(step)]})
     return go.Figure(fig)
-    # return create_fig(time)
-
-# def get_slider_marks() -> dict[float, str]:
-#     return {time: '' for time in df.select(pl.col('time')).to_series()}
 
 app.layout = dbc.Container(
     [
@@ -149,7 +125,7 @@ app.layout = dbc.Container(
                                 dbc.Row(
                                     [
                                         dbc.Label("dt", width=2),
-                                        dbc.Col(dbc.Input(placeholder=1, id='inp-dt', type='number', min=1, step=1, value=1), width=10),
+                                        dbc.Col(dbc.Input(placeholder=1, id='inp-dt', type='number', min=1e-20, value=0.01), width=10),
                                     ]
                                 )
                             ]

@@ -97,7 +97,7 @@ module fd_solver
 
             ! Update water height and velocity
             time_loop: do n = 1, sim_params%timesteps
-                u = u - ((u*finite_diff_center(u) + g*finite_diff_center(h(:, n)))/sim_params%dx) * sim_params%dt
+                u = u - ((u*finite_diff_center(u) + g*finite_diff_center(h(:, n)))/sim_params%dx)*sim_params%dt
                 h(:, n + 1) = h(:, n) - (finite_diff_center(u*(hmean + h(:, n)))/sim_params%dx)*sim_params%dt
             end do time_loop
         end subroutine run_solver
