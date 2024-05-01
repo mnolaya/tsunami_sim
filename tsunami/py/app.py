@@ -27,11 +27,27 @@ def plot_sim_results(h) -> go.Figure:
                         {
                             'label': 'Pause',
                             'method': 'animate',
-                            'args': [None, {'frame': {'duration': 0, 'redraw': False}, 'mode': 'immediate', 'transition': {'duration': 0}}]
+                            'args': [[None], {'frame': {'duration': 0, 'redraw': False}, 'mode': 'immediate', 'transition': {'duration': 0}}]
                         },
-                    ]
+                    ],
+                    'xanchor': 'right',
+                    'yanchor': 'top',
+                    'x': 0,
+                    'y': -0.20,
+                    'direction': 'left',
+                    # "pad": {"r": 10, "t": 5},
                 }
-            ]
+            ],
+            # sliders=[
+            #     {
+            #         'active': 0,
+            #         'xanchor': 'left',
+            #         'yanchor': 'top',
+            #         'len': 0.9,
+            #         'x': 0.1,
+            #         'y': 0,
+            #     }
+            # ],
         ),
         frames=[go.Frame(data=go.Scatter(x=xdata, y=h[:, i])) for i in range(h.shape[1])]
     )
@@ -55,28 +71,28 @@ def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
     h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
     return h, plot_sim_results(h)
 
-@callback(
-    Output('slider', 'max'),
-    Output('slider', 'marks'),
-    Trigger('run-button', 'n_clicks'),
-    State('inp-timesteps', 'value'),
-    prevent_initial_call=True
-)
-def set_slider(timesteps):
-    return timesteps, {i: '' for i in range(timesteps)}
+# @callback(
+#     Output('slider', 'max'),
+#     Output('slider', 'marks'),
+#     Trigger('run-button', 'n_clicks'),
+#     State('inp-timesteps', 'value'),
+#     prevent_initial_call=True
+# )
+# def set_slider(timesteps):
+#     return timesteps, {i: '' for i in range(timesteps)}
 
-@callback(
-    Output('results-fig', 'figure'),
-    State('results-fig', 'figure'),
-    State('results-store', 'data'),
-    State('inp-dt', 'value'),
-    Input('slider', 'value'),
-    prevent_initial_call=True,
-)
-def set_fig_time(fig, h, dt, step):
-    h = np.array(h)
-    fig['data'][0].update({'y': h[:, int(step)]})
-    return go.Figure(fig)
+# @callback(
+#     Output('results-fig', 'figure'),
+#     State('results-fig', 'figure'),
+#     State('results-store', 'data'),
+#     State('inp-dt', 'value'),
+#     Input('slider', 'value'),
+#     prevent_initial_call=True,
+# )
+# def set_fig_time(fig, h, dt, step):
+#     h = np.array(h)
+#     fig['data'][0].update({'y': h[:, int(step)]})
+#     return go.Figure(fig)
 
 app.layout = dbc.Container(
     [
@@ -115,7 +131,7 @@ app.layout = dbc.Container(
                                 dbc.Row(
                                     [
                                         dbc.Label("timesteps", width=2),
-                                        dbc.Col(dbc.Input(placeholder=100, id='inp-timesteps', type='number', min=1, step=1, value=100), width=10),
+                                        dbc.Col(dbc.Input(placeholder=100, id='inp-timesteps', type='number', min=1, step=1, value=1000), width=10),
                                     ]
                                 )
                             ]
@@ -178,7 +194,7 @@ app.layout = dbc.Container(
             dbc.Col(
                 [
                     dcc.Graph(id='results-fig'),
-                    dcc.Slider(id='slider', min=0, max=1, step=None, updatemode='drag')
+                    # dcc.Slider(id='slider', min=0, max=1, step=None, updatemode='drag')
                 ]
             )
         ),
