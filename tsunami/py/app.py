@@ -4,7 +4,8 @@ import plotly.graph_objs as go
 import numpy as np
 
 # Load the shared object libraries for the tsunami simulator
-from tsunami.bin.tsunami_fort import Tsunami
+# from tsunami.bin.tsunami_fort import Tsunami
+from tsunami.py import tsunami_solver as solver
 
 app = DashProxy(__name__, external_stylesheets=[dbc.themes.MATERIA], transforms=[TriggerTransform(), MultiplexerTransform()])
 
@@ -67,9 +68,11 @@ def plot_sim_results(h) -> go.Figure:
     prevent_initial_call=True
 )
 def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
-    solver = Tsunami()
-    h = solver.run_solver(icenter, grid_size, timesteps, dt, dx, c, decay)
-    return h, plot_sim_results(h)
+    # solver = Tsunami()
+    sim_params = solver.SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
+    h = solver.run_solver(sim_params)
+    print(h)
+    # return h, plot_sim_results(h)
 
 # @callback(
 #     Output('slider', 'max'),
