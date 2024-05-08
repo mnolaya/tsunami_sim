@@ -1,4 +1,4 @@
-from attrs import define
+from attrs import define, asdict
 import numpy as np
 
 from tsunami.bin.tsunami_fort import run_solver as c_run_solver

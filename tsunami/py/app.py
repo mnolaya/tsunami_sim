@@ -71,8 +71,7 @@ def run_simulation(icenter, grid_size, timesteps, dt, dx, c, decay):
     # solver = Tsunami()
     sim_params = solver.SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
     h = solver.run_solver(sim_params)
-    print(h)
-    # return h, plot_sim_results(h)
+    return h, plot_sim_results(h)
 
 # @callback(
 #     Output('slider', 'max'),

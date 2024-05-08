@@ -13,34 +13,23 @@ module py_iface
 
     contains
         subroutine c_run_solver(c_sim_params, h) bind(c)
-        ! subroutine c_run_solver(icenter, grid_size, timesteps, dt, dx, c, decay, h) bind(c)
             ! Args
-            ! type(c_SimParams), intent(in) :: c_sim_params
-            type(c_ptr), intent(in) :: c_sim_params
-            ! integer(c_int), intent(in) :: icenter, grid_size, timesteps
-            ! real(c_double), intent(in) :: dt, dx, c, decay
-            real(c_double), intent(out) :: h(100, 1000 + 1)
+            type(c_SimParams), intent(in) :: c_sim_params
+            real(c_double), intent(out) :: h(c_sim_params%grid_size, c_sim_params%timesteps + 1)
             
             ! Loc vars
             real(r64), allocatable :: h_alloc(:, :)
-            type(SimParams), pointer :: sim_params
+            type(SimParams) :: sim_params
 
-            call c_f_pointer(c_sim_params, sim_params)
-
-            ! Initialize SimParams type
-            ! c_sim_params = c_SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
-            ! sim_params%icenter = c_sim_params%icenter
-            ! sim_params%grid_size = c_sim_params%grid_size
-            ! sim_params%timesteps = c_sim_params%timesteps
-            ! sim_params%dt = c_sim_params%dt
-            ! sim_params%dx = c_sim_params%dx
-            ! sim_params%c = c_sim_params%c
-            ! sim_params%decay = c_sim_params%decay
-            ! sim_params = SimParams(icenter, grid_size, timesteps, dt, dx, c, decay)
-            print *, sim_params%icenter
-            print *, "check"
-            call exit()
-
+            ! Copy to non-c type
+            sim_params%icenter = c_sim_params%icenter
+            sim_params%grid_size = c_sim_params%grid_size
+            sim_params%timesteps = c_sim_params%timesteps
+            sim_params%dt = c_sim_params%dt
+            sim_params%dx = c_sim_params%dx
+            sim_params%c = c_sim_params%c
+            sim_params%decay = c_sim_params%decay
+            
             ! Run solver and copy data to explicitly sized array for interfacing with C
             call run_solver(sim_params, h_alloc)
             h = h_alloc
