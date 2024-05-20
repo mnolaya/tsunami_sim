@@ -8,7 +8,9 @@
 
 ## Abstract
 
-This app is based upon the tsunami simulator project presented in the Milan Curcic's textbook, "Modern Fortran: Building efficient parallel applications." 
+This program is based upon the tsunami simulator project presented in, "Modern Fortran: Building efficient parallel applications," by Milan Curcic. Python is used to drive the frontend via a web-based GUI built using the Plotly Dash 
+library. The solver (as per the project) is written in Fortran, with interfaces between Python and Fortran handlded using
+C-bindings native to Fortran and the Cython Python library.
 
 ## Installation
 
