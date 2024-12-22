@@ -37,7 +37,7 @@ python setup.py build_ext --inplace
 *Development only*
 
 ```
-pip install -e .
+python -m pip install -e .
 ```
 
 ## Running the app
