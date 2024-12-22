@@ -9,7 +9,7 @@
             "/home/mnolaya/miniconda3/envs/venv/lib/python3.11/site-packages/numpy/core/include/numpy/ndarrayobject.h",
             "/home/mnolaya/miniconda3/envs/venv/lib/python3.11/site-packages/numpy/core/include/numpy/ndarraytypes.h",
             "/home/mnolaya/miniconda3/envs/venv/lib/python3.11/site-packages/numpy/core/include/numpy/ufuncobject.h",
-            "tsunami/fort/tsunami_fort.h"
+            "tsunami/fort/tsunami.h"
         ],
         "include_dirs": [
             "tsunami/fort",
@@ -19,20 +19,15 @@
         "libraries": [
             "tsunami"
         ],
-        "library_dirs": [
-            "tsunami/bin",
-            "tsunami/fort"
-        ],
-        "name": "tsunami_fort",
+        "name": "tsunami.fort.tsufort",
         "runtime_library_dirs": [
-            "tsunami/bin",
-            "tsunami/fort"
+            "tsunami/bin"
         ],
         "sources": [
             "tsunami/fort/tsunami.pyx"
         ]
     },
-    "module_name": "tsunami_fort"
+    "module_name": "tsunami.fort.tsufort"
 }
 END: Cython Metadata */
 
@@ -1252,8 +1247,8 @@ static CYTHON_INLINE float __PYX_NAN() {
   #endif
 #endif
 
-#define __PYX_HAVE__tsunami_fort
-#define __PYX_HAVE_API__tsunami_fort
+#define __PYX_HAVE__tsunami__fort__tsufort
+#define __PYX_HAVE_API__tsunami__fort__tsufort
 /* Early includes */
 #include <string.h>
 #include <stdio.h>
@@ -1265,7 +1260,7 @@ static CYTHON_INLINE float __PYX_NAN() {
 #include "numpy/ndarraytypes.h"
 #include "numpy/arrayscalars.h"
 #include "numpy/ufuncobject.h"
-#include "tsunami_fort.h"
+#include "tsunami.h"
 #ifdef _OPENMP
 #include <omp.h>
 #endif /* _OPENMP */
@@ -2604,15 +2599,15 @@ static CYTHON_INLINE char *__pyx_f_5numpy_7ndarray_4data_data(PyArrayObject *__p
 
 /* Module declarations from "numpy" */
 
-/* Module declarations from "tsunami_fort" */
+/* Module declarations from "tsunami.fort.tsufort" */
 /* #### Code section: typeinfo ### */
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 /* #### Code section: before_global_var ### */
-#define __Pyx_MODULE_NAME "tsunami_fort"
-extern int __pyx_module_is_main_tsunami_fort;
-int __pyx_module_is_main_tsunami_fort = 0;
+#define __Pyx_MODULE_NAME "tsunami.fort.tsufort"
+extern int __pyx_module_is_main_tsunami__fort__tsufort;
+int __pyx_module_is_main_tsunami__fort__tsufort = 0;
 
-/* Implementation of "tsunami_fort" */
+/* Implementation of "tsunami.fort.tsufort" */
 /* #### Code section: global_var ### */
 static PyObject *__pyx_builtin_ImportError;
 /* #### Code section: string_decls ### */
@@ -2644,15 +2639,15 @@ static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_c_sim_params[] = "c_sim_params";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
-static const char __pyx_k_tsunami_fort[] = "tsunami_fort";
 static const char __pyx_k_asfortranarray[] = "asfortranarray";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
+static const char __pyx_k_tsunami_fort_tsufort[] = "tsunami.fort.tsufort";
 static const char __pyx_k_tsunami_fort_tsunami_pyx[] = "tsunami/fort/tsunami.pyx";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_12tsunami_fort_run_solver(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sim_params); /* proto */
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_run_solver(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sim_params); /* proto */
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2749,7 +2744,7 @@ typedef struct {
   PyObject *__pyx_n_s_spec;
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_timesteps;
-  PyObject *__pyx_n_s_tsunami_fort;
+  PyObject *__pyx_n_s_tsunami_fort_tsufort;
   PyObject *__pyx_kp_s_tsunami_fort_tsunami_pyx;
   PyObject *__pyx_int_1;
   PyObject *__pyx_tuple_;
@@ -2847,7 +2842,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_spec);
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_timesteps);
-  Py_CLEAR(clear_module_state->__pyx_n_s_tsunami_fort);
+  Py_CLEAR(clear_module_state->__pyx_n_s_tsunami_fort_tsufort);
   Py_CLEAR(clear_module_state->__pyx_kp_s_tsunami_fort_tsunami_pyx);
   Py_CLEAR(clear_module_state->__pyx_int_1);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
@@ -2923,7 +2918,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_spec);
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_timesteps);
-  Py_VISIT(traverse_module_state->__pyx_n_s_tsunami_fort);
+  Py_VISIT(traverse_module_state->__pyx_n_s_tsunami_fort_tsufort);
   Py_VISIT(traverse_module_state->__pyx_kp_s_tsunami_fort_tsunami_pyx);
   Py_VISIT(traverse_module_state->__pyx_int_1);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
@@ -3027,7 +3022,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_spec __pyx_mstate_global->__pyx_n_s_spec
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_timesteps __pyx_mstate_global->__pyx_n_s_timesteps
-#define __pyx_n_s_tsunami_fort __pyx_mstate_global->__pyx_n_s_tsunami_fort
+#define __pyx_n_s_tsunami_fort_tsufort __pyx_mstate_global->__pyx_n_s_tsunami_fort_tsufort
 #define __pyx_kp_s_tsunami_fort_tsunami_pyx __pyx_mstate_global->__pyx_kp_s_tsunami_fort_tsunami_pyx
 #define __pyx_int_1 __pyx_mstate_global->__pyx_int_1
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
@@ -4307,15 +4302,15 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_12tsunami_fort_1run_solver(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_1run_solver(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_12tsunami_fort_1run_solver = {"run_solver", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_12tsunami_fort_1run_solver, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_12tsunami_fort_1run_solver(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_7tsunami_4fort_7tsufort_1run_solver = {"run_solver", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_4fort_7tsufort_1run_solver, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_1run_solver(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -4385,11 +4380,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("tsunami_fort.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami.fort.tsufort.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_12tsunami_fort_run_solver(__pyx_self, __pyx_v_sim_params);
+  __pyx_r = __pyx_pf_7tsunami_4fort_7tsufort_run_solver(__pyx_self, __pyx_v_sim_params);
 
   /* function exit code */
   {
@@ -4402,7 +4397,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_12tsunami_fort_run_solver(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sim_params) {
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_run_solver(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_sim_params) {
   PyArrayObject *__pyx_v_h = 0;
   struct c_SimParams __pyx_v_c_sim_params;
   __Pyx_LocalBuf_ND __pyx_pybuffernd_h;
@@ -4655,7 +4650,7 @@ static PyObject *__pyx_pf_12tsunami_fort_run_solver(CYTHON_UNUSED PyObject *__py
     __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
     __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
   __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
-  __Pyx_AddTraceback("tsunami_fort.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("tsunami.fort.tsufort.run_solver", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   goto __pyx_L2;
   __pyx_L0:;
@@ -4716,7 +4711,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_spec, __pyx_k_spec, sizeof(__pyx_k_spec), 0, 0, 1, 1},
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_timesteps, __pyx_k_timesteps, sizeof(__pyx_k_timesteps), 0, 0, 1, 1},
-    {&__pyx_n_s_tsunami_fort, __pyx_k_tsunami_fort, sizeof(__pyx_k_tsunami_fort), 0, 0, 1, 1},
+    {&__pyx_n_s_tsunami_fort_tsufort, __pyx_k_tsunami_fort_tsufort, sizeof(__pyx_k_tsunami_fort_tsufort), 0, 0, 1, 1},
     {&__pyx_kp_s_tsunami_fort_tsunami_pyx, __pyx_k_tsunami_fort_tsunami_pyx, sizeof(__pyx_k_tsunami_fort_tsunami_pyx), 0, 0, 1, 0},
     {0, 0, 0, 0, 0, 0, 0}
   };
@@ -4917,10 +4912,10 @@ static int __Pyx_modinit_function_import_code(void) {
 #if PY_MAJOR_VERSION >= 3
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 static PyObject* __pyx_pymod_create(PyObject *spec, PyModuleDef *def); /*proto*/
-static int __pyx_pymod_exec_tsunami_fort(PyObject* module); /*proto*/
+static int __pyx_pymod_exec_tsufort(PyObject* module); /*proto*/
 static PyModuleDef_Slot __pyx_moduledef_slots[] = {
   {Py_mod_create, (void*)__pyx_pymod_create},
-  {Py_mod_exec, (void*)__pyx_pymod_exec_tsunami_fort},
+  {Py_mod_exec, (void*)__pyx_pymod_exec_tsufort},
   {0, NULL}
 };
 #endif
@@ -4933,7 +4928,7 @@ namespace {
   #endif
   {
       PyModuleDef_HEAD_INIT,
-      "tsunami_fort",
+      "tsufort",
       0, /* m_doc */
     #if CYTHON_PEP489_MULTI_PHASE_INIT
       0, /* m_size */
@@ -4981,11 +4976,11 @@ namespace {
 
 
 #if PY_MAJOR_VERSION < 3
-__Pyx_PyMODINIT_FUNC inittsunami_fort(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC inittsunami_fort(void)
+__Pyx_PyMODINIT_FUNC inittsufort(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC inittsufort(void)
 #else
-__Pyx_PyMODINIT_FUNC PyInit_tsunami_fort(void) CYTHON_SMALL_CODE; /*proto*/
-__Pyx_PyMODINIT_FUNC PyInit_tsunami_fort(void)
+__Pyx_PyMODINIT_FUNC PyInit_tsufort(void) CYTHON_SMALL_CODE; /*proto*/
+__Pyx_PyMODINIT_FUNC PyInit_tsufort(void)
 #if CYTHON_PEP489_MULTI_PHASE_INIT
 {
   return PyModuleDef_Init(&__pyx_moduledef);
@@ -5066,7 +5061,7 @@ bad:
 }
 
 
-static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami_fort(PyObject *__pyx_pyinit_module)
+static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsufort(PyObject *__pyx_pyinit_module)
 #endif
 #endif
 {
@@ -5083,7 +5078,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami_fort(PyObject *__pyx_pyini
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   if (__pyx_m) {
     if (__pyx_m == __pyx_pyinit_module) return 0;
-    PyErr_SetString(PyExc_RuntimeError, "Module 'tsunami_fort' has already been imported. Re-initialisation is not supported.");
+    PyErr_SetString(PyExc_RuntimeError, "Module 'tsufort' has already been imported. Re-initialisation is not supported.");
     return -1;
   }
   #elif PY_MAJOR_VERSION >= 3
@@ -5095,13 +5090,13 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_tsunami_fort(PyObject *__pyx_pyini
   Py_INCREF(__pyx_m);
   #else
   #if PY_MAJOR_VERSION < 3
-  __pyx_m = Py_InitModule4("tsunami_fort", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
+  __pyx_m = Py_InitModule4("tsufort", __pyx_methods, 0, 0, PYTHON_API_VERSION); Py_XINCREF(__pyx_m);
   if (unlikely(!__pyx_m)) __PYX_ERR(1, 1, __pyx_L1_error)
   #elif CYTHON_USE_MODULE_STATE
   __pyx_t_1 = PyModule_Create(&__pyx_moduledef); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 1, __pyx_L1_error)
   {
     int add_module_result = PyState_AddModule(__pyx_t_1, &__pyx_moduledef);
-    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "tsunami_fort" pseudovariable */
+    __pyx_t_1 = 0; /* transfer ownership from __pyx_t_1 to "tsufort" pseudovariable */
     if (unlikely((add_module_result < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     pystate_addmodule_run = 1;
   }
@@ -5125,7 +5120,7 @@ if (!__Pyx_RefNanny) {
       Py_FatalError("failed to import 'refnanny' module");
 }
 #endif
-  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_tsunami_fort(void)", 0);
+  __Pyx_RefNannySetupContext("__Pyx_PyMODINIT_FUNC PyInit_tsufort(void)", 0);
   if (__Pyx_check_binary_version(__PYX_LIMITED_VERSION_HEX, __Pyx_get_runtime_version(), CYTHON_COMPILING_IN_LIMITED_API) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #ifdef __Pxy_PyFrame_Initialize_Offsets
   __Pxy_PyFrame_Initialize_Offsets();
@@ -5163,14 +5158,14 @@ if (!__Pyx_RefNanny) {
   #if PY_MAJOR_VERSION < 3 && (__PYX_DEFAULT_STRING_ENCODING_IS_ASCII || __PYX_DEFAULT_STRING_ENCODING_IS_DEFAULT)
   if (__Pyx_init_sys_getdefaultencoding_params() < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   #endif
-  if (__pyx_module_is_main_tsunami_fort) {
+  if (__pyx_module_is_main_tsunami__fort__tsufort) {
     if (PyObject_SetAttr(__pyx_m, __pyx_n_s_name, __pyx_n_s_main) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   }
   #if PY_MAJOR_VERSION >= 3
   {
     PyObject *modules = PyImport_GetModuleDict(); if (unlikely(!modules)) __PYX_ERR(1, 1, __pyx_L1_error)
-    if (!PyDict_GetItemString(modules, "tsunami_fort")) {
-      if (unlikely((PyDict_SetItemString(modules, "tsunami_fort", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
+    if (!PyDict_GetItemString(modules, "tsunami.fort.tsufort")) {
+      if (unlikely((PyDict_SetItemString(modules, "tsunami.fort.tsufort", __pyx_m) < 0))) __PYX_ERR(1, 1, __pyx_L1_error)
     }
   }
   #endif
@@ -5208,7 +5203,7 @@ if (!__Pyx_RefNanny) {
  *     cdef ndarray[dtype='double', ndim=2, mode='fortran'] h = np.empty((sim_params.grid_size, sim_params.timesteps + 1), dtype='double', order='F')
  *     cdef c_SimParams c_sim_params
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_12tsunami_fort_1run_solver, 0, __pyx_n_s_run_solver, NULL, __pyx_n_s_tsunami_fort, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 25, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_1run_solver, 0, __pyx_n_s_run_solver, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_run_solver, __pyx_t_2) < 0) __PYX_ERR(1, 25, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -5230,7 +5225,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_XDECREF(__pyx_t_2);
   if (__pyx_m) {
     if (__pyx_d && stringtab_initialized) {
-      __Pyx_AddTraceback("init tsunami_fort", __pyx_clineno, __pyx_lineno, __pyx_filename);
+      __Pyx_AddTraceback("init tsunami.fort.tsufort", __pyx_clineno, __pyx_lineno, __pyx_filename);
     }
     #if !CYTHON_USE_MODULE_STATE
     Py_CLEAR(__pyx_m);
@@ -5244,7 +5239,7 @@ if (!__Pyx_RefNanny) {
     }
     #endif
   } else if (!PyErr_Occurred()) {
-    PyErr_SetString(PyExc_ImportError, "init tsunami_fort");
+    PyErr_SetString(PyExc_ImportError, "init tsunami.fort.tsufort");
   }
   __pyx_L0:;
   __Pyx_RefNannyFinishContext();

@@ -11,6 +11,8 @@ module py_iface
         real(c_double) :: dt, dx, c, decay
     end type c_SimParams
 
+    real(c_double) :: test = 10
+
     contains
         subroutine c_run_solver(c_sim_params, h) bind(c)
             ! Args

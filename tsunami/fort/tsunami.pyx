@@ -1,7 +1,7 @@
 import numpy as np
 from numpy cimport ndarray
 
-cdef extern from 'tsunami_fort.h':
+cdef extern from 'tsunami.h':
     cdef struct c_SimParams:
         int icenter
         int grid_size
