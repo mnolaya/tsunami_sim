@@ -1,0 +1,7 @@
+[build-system]
+requires = ["setuptools", "numpy", "Cython"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tsunami"
+dynamic = ["version"]
