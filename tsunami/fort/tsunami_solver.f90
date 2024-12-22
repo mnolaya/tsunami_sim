@@ -1,14 +1,15 @@
 module fd_solver
 
     use, intrinsic :: iso_fortran_env, only: r64 => real64
+    use, intrinsic :: iso_c_binding, only: c_bool, c_int, c_double
 
     implicit none
 
     type :: SimParams
         integer :: icenter, grid_size, timesteps
         real(r64) :: dt, dx, c, decay
-        contains
-            procedure, pass :: validate => validate_sim_params
+        ! contains
+        !     procedure, pass :: validate => validate_sim_params
     end type SimParams
 
     interface SimParams
@@ -32,16 +33,47 @@ module fd_solver
             self%decay = decay
         end function init_sim_params
 
-        !> Validate params
-        subroutine validate_sim_params(self)
-            ! Args
-            class(SimParams), intent(in) :: self
+        ! !> Validate params
+        ! subroutine validate_sim_params(self)
+        !     ! Args
+        !     class(SimParams), intent(in) :: self
 
-            if (self%grid_size <= 0) stop "grid_size must be > 0"
-            if (self%dt <= 0) stop "time step dt must be > 0"
-            if (self%dx <= 0) stop "grid spacing dx must be > 0"
-            if (self%c <= 0) stop "background flow speed c must be > 0"
-        end subroutine validate_sim_params
+        !     if (self%grid_size <= 0) stop "grid_size must be > 0"
+        !     if (self%dt <= 0) stop "time step dt must be > 0"
+        !     if (self%dx <= 0) stop "grid spacing dx must be > 0"
+        !     if (self%c <= 0) stop "background flow speed c must be > 0"
+        ! end subroutine validate_sim_params
+
+        ! Validate simulation parameters
+        function validate_sim_params( &
+            grid_size, &
+            dt, &
+            dx, &
+            c &
+        ) bind(c, name="f_validate_sim_params") result(is_valid)
+            ! Args
+            integer(c_int), intent(in) :: grid_size
+            real(c_double), intent(in) :: dt, dx, c
+            logical(c_bool) :: is_valid
+            
+            is_valid = .true.
+            if (grid_size <= 0) then
+                print *, "grid_size must be > 0"
+                is_valid = .false.
+            end if
+            if (dt <= 0) then
+                print *, "time step dt must be > 0"
+                is_valid = .false.
+            end if
+            if (dx <= 0) then
+                print *, "grid spacing dx must be > 0"
+                is_valid = .false.
+            end if
+            if (c <= 0) then
+                print *, "background flow speed c must be > 0"
+                is_valid = .false.
+            end if
+        end function validate_sim_params
 
         !> Compute the finite difference between an array of points.
         function finit_diff_upwind(x) result(dx)
