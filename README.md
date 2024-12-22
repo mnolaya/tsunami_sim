@@ -26,10 +26,10 @@ A Makefile is provided to aid in the build process. Simply run `make` in the com
 
 ### Building Cython libraries
 
-The Cython libraries are used to interface between Python and Fortran, thus allowing importing of procedures written in Fortran into a Python script. To install in the correct bin directory, run:
+The Cython libraries are used to interface between Python and Fortran, thus allowing importing of procedures written in Fortran into a Python script. To build:
 
 ```
-python setup.py build_ext -b tsunami/bin
+python setup.py build_ext --inplace
 ```
 
 ### Install package to Python environment
