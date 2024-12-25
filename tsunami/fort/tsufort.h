@@ -12,3 +12,5 @@
 // void c_run_solver(void *c_SimParams, double *h);
 
 int f_validate_sim_params(int *grid_size, double *dt, double *dx, double *c);
+
+double f_finite_diff_center(double *x, double *dx, int *n);

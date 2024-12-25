@@ -16,9 +16,9 @@ $(shell mkdir -p $(MOD))
 build: tsunami copy clean
 
 tsunami:
-	$(FC) $(FFLAGS) -c $(SRC)/tsunami_solver.f90 -I $(BUILD) -J $(BUILD) -L $(BUILD)
-	$(FC) $(FFLAGS) -c $(SRC)/py_iface.f90 -I $(BUILD) -J $(BUILD) -L $(BUILD)
-	$(FC) *.o -shared -o $(BUILD)/libtsunami.so
+	$(FC) $(FFLAGS) -c $(SRC)/tsufort.f90 -I $(BUILD) -J $(BUILD) -L $(BUILD)
+	$(FC) $(FFLAGS) -c $(SRC)/tsufort_py_wrappers.f90 -I $(BUILD) -J $(BUILD) -L $(BUILD)
+	$(FC) *.o -shared -o $(BUILD)/libtsufort.so
 	rm *.o
 
 clean:

@@ -1,9 +1,10 @@
-module fd_solver
+module tsufort
 
     use, intrinsic :: iso_fortran_env, only: r64 => real64
-    use, intrinsic :: iso_c_binding, only: c_bool, c_int, c_double
 
     implicit none
+    private
+    public :: validate_sim_params, finite_diff_center
 
     type :: SimParams
         integer :: icenter, grid_size, timesteps
@@ -50,11 +51,11 @@ module fd_solver
             dt, &
             dx, &
             c &
-        ) bind(c, name="f_validate_sim_params") result(is_valid)
+        ) result(is_valid)
             ! Args
-            integer(c_int), intent(in) :: grid_size
-            real(c_double), intent(in) :: dt, dx, c
-            logical(c_bool) :: is_valid
+            integer, intent(in) :: grid_size
+            real(r64), intent(in) :: dt, dx, c
+            logical :: is_valid
             
             is_valid = .true.
             if (grid_size <= 0) then
@@ -133,4 +134,4 @@ module fd_solver
                 h(:, n + 1) = h(:, n) - (finite_diff_center(u*(hmean + h(:, n)))/sim_params%dx)*sim_params%dt
             end do time_loop
         end subroutine run_solver
-end module fd_solver
+end module tsufort

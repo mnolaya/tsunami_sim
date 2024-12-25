@@ -1,4 +1,5 @@
 from attrs import define
+import numpy as np
 
 from tsunami.fort import tsufort
 
@@ -13,13 +14,14 @@ class SimParams:
 def main() -> None:
     # Set simulation parameters
     sim_params = SimParams()
-
-    # Check parameters are okay for simulation
-    print(tsufort.validate_sim_params(sim_params.grid_size, sim_params.dt, sim_params.dx, sim_params.c))
-        # print('check')
-
-
     print(sim_params)
+    # Check parameters are okay for simulation
+    is_valid = tsufort.validate_sim_params(sim_params.grid_size, sim_params.dt, sim_params.dx, sim_params.c)
+    print(is_valid)
+    x = np.array([0, 1, 2, 1, 2, 3], dtype=float)
+    print(x)
+    dx = tsufort.finite_diff_center(x)
+    print(dx)
     
 
 if __name__ == "__main__":

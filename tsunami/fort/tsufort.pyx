@@ -14,6 +14,8 @@ cdef extern from 'tsufort.h':
     # cdef void c_run_solver(c_SimParams *word, double *h)
     # cdef bint test = True
     cdef bint f_validate_sim_params(int *grid_size, double *dt, double *dx, double *c)
+    cdef double f_finite_diff_center(double *x, double *dx, int *n)
+
     # cdef void c_run_solver(int *icenter, int *grid_size, int *timesteps, double *dt, double *dx, double *c, double *decay, double *h)
 
 #// cdef class c_Tsunami:
@@ -41,14 +43,18 @@ cdef extern from 'tsufort.h':
 #     c_run_solver(&c_sim_params, &h[0, 0])
 # #     return np.asfortranarray(h)
 
-def validate_sim_params(grid_size, dt, dx, c):
+def validate_sim_params(int grid_size, double dt, double dx, double c):
     '''
     Validate the tsunami simulation parameters.
     '''
-    cdef int _grid_size = grid_size
-    cdef double _dt = dt
-    cdef double _dx = dx
-    cdef double _c = c 
-    cdef bint test
-    # _grid_size = grid_size
-    return f_validate_sim_params(&_grid_size, &_dt, &_dx, &_c)
+    return f_validate_sim_params(&grid_size, &dt, &dx, &c)
+
+# def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
+def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
+    '''
+    Compute the first derivative numerically using the central finite difference scheme.
+    '''
+    cdef int n = x.shape[0]
+    cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')
+    f_finite_diff_center(&x[0], &dx[0], &n)
+    return dx
