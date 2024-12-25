@@ -76,7 +76,7 @@ module fd_solver
         end function validate_sim_params
 
         !> Compute the finite difference between an array of points.
-        function finit_diff_upwind(x) result(dx)
+        function finite_diff_upwind(x) result(dx)
             ! Args
             real(r64), intent(in) :: x(:)
             real(r64) :: dx(size(x))
@@ -87,7 +87,7 @@ module fd_solver
             i = size(x)
             dx(1) = x(1) - x(i) ! Periodic condition
             dx(2:i) = x(2:i) - x(1:i-1)
-        end function finit_diff_upwind
+        end function finite_diff_upwind
 
         !> Compute the finite difference between an array of points.
         function finite_diff_center(x) result(dx)
