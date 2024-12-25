@@ -2573,24 +2573,28 @@ static PyObject *__pyx_builtin_ImportError;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_F[] = "F";
 static const char __pyx_k_c[] = "c";
+static const char __pyx_k_h[] = "h";
 static const char __pyx_k_n[] = "n";
 static const char __pyx_k_x[] = "x";
 static const char __pyx_k__3[] = "*";
-static const char __pyx_k__8[] = "?";
 static const char __pyx_k_dt[] = "dt";
 static const char __pyx_k_dx[] = "dx";
 static const char __pyx_k_np[] = "np";
+static const char __pyx_k__10[] = "?";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_spec[] = "__spec__";
 static const char __pyx_k_test[] = "__test__";
+static const char __pyx_k_decay[] = "decay";
 static const char __pyx_k_dtype[] = "dtype";
 static const char __pyx_k_empty[] = "empty";
 static const char __pyx_k_numpy[] = "numpy";
 static const char __pyx_k_order[] = "order";
 static const char __pyx_k_double[] = "double";
 static const char __pyx_k_import[] = "__import__";
+static const char __pyx_k_icenter[] = "icenter";
 static const char __pyx_k_grid_size[] = "grid_size";
+static const char __pyx_k_gauss_init[] = "gauss_init";
 static const char __pyx_k_ImportError[] = "ImportError";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
@@ -2605,6 +2609,7 @@ static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_grid_size, double __pyx_v_dt, double __pyx_v_dx, double __pyx_v_c); /* proto */
 static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_x); /* proto */
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_grid_size, double __pyx_v_decay, int __pyx_v_icenter); /* proto */
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2670,18 +2675,22 @@ typedef struct {
   #endif
   PyObject *__pyx_n_s_F;
   PyObject *__pyx_n_s_ImportError;
+  PyObject *__pyx_n_s__10;
   PyObject *__pyx_n_s__3;
-  PyObject *__pyx_n_s__8;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_c;
   PyObject *__pyx_n_s_cline_in_traceback;
+  PyObject *__pyx_n_s_decay;
   PyObject *__pyx_n_s_double;
   PyObject *__pyx_n_s_dt;
   PyObject *__pyx_n_s_dtype;
   PyObject *__pyx_n_s_dx;
   PyObject *__pyx_n_s_empty;
   PyObject *__pyx_n_s_finite_diff_center;
+  PyObject *__pyx_n_s_gauss_init;
   PyObject *__pyx_n_s_grid_size;
+  PyObject *__pyx_n_s_h;
+  PyObject *__pyx_n_s_icenter;
   PyObject *__pyx_n_s_import;
   PyObject *__pyx_n_s_initializing;
   PyObject *__pyx_n_s_is_coroutine;
@@ -2703,8 +2712,10 @@ typedef struct {
   PyObject *__pyx_tuple__2;
   PyObject *__pyx_tuple__4;
   PyObject *__pyx_tuple__6;
+  PyObject *__pyx_tuple__8;
   PyObject *__pyx_codeobj__5;
   PyObject *__pyx_codeobj__7;
+  PyObject *__pyx_codeobj__9;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2765,18 +2776,22 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
   Py_CLEAR(clear_module_state->__pyx_n_s_F);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
+  Py_CLEAR(clear_module_state->__pyx_n_s__10);
   Py_CLEAR(clear_module_state->__pyx_n_s__3);
-  Py_CLEAR(clear_module_state->__pyx_n_s__8);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_c);
   Py_CLEAR(clear_module_state->__pyx_n_s_cline_in_traceback);
+  Py_CLEAR(clear_module_state->__pyx_n_s_decay);
   Py_CLEAR(clear_module_state->__pyx_n_s_double);
   Py_CLEAR(clear_module_state->__pyx_n_s_dt);
   Py_CLEAR(clear_module_state->__pyx_n_s_dtype);
   Py_CLEAR(clear_module_state->__pyx_n_s_dx);
   Py_CLEAR(clear_module_state->__pyx_n_s_empty);
   Py_CLEAR(clear_module_state->__pyx_n_s_finite_diff_center);
+  Py_CLEAR(clear_module_state->__pyx_n_s_gauss_init);
   Py_CLEAR(clear_module_state->__pyx_n_s_grid_size);
+  Py_CLEAR(clear_module_state->__pyx_n_s_h);
+  Py_CLEAR(clear_module_state->__pyx_n_s_icenter);
   Py_CLEAR(clear_module_state->__pyx_n_s_import);
   Py_CLEAR(clear_module_state->__pyx_n_s_initializing);
   Py_CLEAR(clear_module_state->__pyx_n_s_is_coroutine);
@@ -2798,8 +2813,10 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__2);
   Py_CLEAR(clear_module_state->__pyx_tuple__4);
   Py_CLEAR(clear_module_state->__pyx_tuple__6);
+  Py_CLEAR(clear_module_state->__pyx_tuple__8);
   Py_CLEAR(clear_module_state->__pyx_codeobj__5);
   Py_CLEAR(clear_module_state->__pyx_codeobj__7);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__9);
   return 0;
 }
 #endif
@@ -2838,18 +2855,22 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
   Py_VISIT(traverse_module_state->__pyx_n_s_F);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
+  Py_VISIT(traverse_module_state->__pyx_n_s__10);
   Py_VISIT(traverse_module_state->__pyx_n_s__3);
-  Py_VISIT(traverse_module_state->__pyx_n_s__8);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_c);
   Py_VISIT(traverse_module_state->__pyx_n_s_cline_in_traceback);
+  Py_VISIT(traverse_module_state->__pyx_n_s_decay);
   Py_VISIT(traverse_module_state->__pyx_n_s_double);
   Py_VISIT(traverse_module_state->__pyx_n_s_dt);
   Py_VISIT(traverse_module_state->__pyx_n_s_dtype);
   Py_VISIT(traverse_module_state->__pyx_n_s_dx);
   Py_VISIT(traverse_module_state->__pyx_n_s_empty);
   Py_VISIT(traverse_module_state->__pyx_n_s_finite_diff_center);
+  Py_VISIT(traverse_module_state->__pyx_n_s_gauss_init);
   Py_VISIT(traverse_module_state->__pyx_n_s_grid_size);
+  Py_VISIT(traverse_module_state->__pyx_n_s_h);
+  Py_VISIT(traverse_module_state->__pyx_n_s_icenter);
   Py_VISIT(traverse_module_state->__pyx_n_s_import);
   Py_VISIT(traverse_module_state->__pyx_n_s_initializing);
   Py_VISIT(traverse_module_state->__pyx_n_s_is_coroutine);
@@ -2871,8 +2892,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__2);
   Py_VISIT(traverse_module_state->__pyx_tuple__4);
   Py_VISIT(traverse_module_state->__pyx_tuple__6);
+  Py_VISIT(traverse_module_state->__pyx_tuple__8);
   Py_VISIT(traverse_module_state->__pyx_codeobj__5);
   Py_VISIT(traverse_module_state->__pyx_codeobj__7);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__9);
   return 0;
 }
 #endif
@@ -2939,18 +2962,22 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #define __pyx_n_s_F __pyx_mstate_global->__pyx_n_s_F
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
+#define __pyx_n_s__10 __pyx_mstate_global->__pyx_n_s__10
 #define __pyx_n_s__3 __pyx_mstate_global->__pyx_n_s__3
-#define __pyx_n_s__8 __pyx_mstate_global->__pyx_n_s__8
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_c __pyx_mstate_global->__pyx_n_s_c
 #define __pyx_n_s_cline_in_traceback __pyx_mstate_global->__pyx_n_s_cline_in_traceback
+#define __pyx_n_s_decay __pyx_mstate_global->__pyx_n_s_decay
 #define __pyx_n_s_double __pyx_mstate_global->__pyx_n_s_double
 #define __pyx_n_s_dt __pyx_mstate_global->__pyx_n_s_dt
 #define __pyx_n_s_dtype __pyx_mstate_global->__pyx_n_s_dtype
 #define __pyx_n_s_dx __pyx_mstate_global->__pyx_n_s_dx
 #define __pyx_n_s_empty __pyx_mstate_global->__pyx_n_s_empty
 #define __pyx_n_s_finite_diff_center __pyx_mstate_global->__pyx_n_s_finite_diff_center
+#define __pyx_n_s_gauss_init __pyx_mstate_global->__pyx_n_s_gauss_init
 #define __pyx_n_s_grid_size __pyx_mstate_global->__pyx_n_s_grid_size
+#define __pyx_n_s_h __pyx_mstate_global->__pyx_n_s_h
+#define __pyx_n_s_icenter __pyx_mstate_global->__pyx_n_s_icenter
 #define __pyx_n_s_import __pyx_mstate_global->__pyx_n_s_import
 #define __pyx_n_s_initializing __pyx_mstate_global->__pyx_n_s_initializing
 #define __pyx_n_s_is_coroutine __pyx_mstate_global->__pyx_n_s_is_coroutine
@@ -2972,8 +2999,10 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__2 __pyx_mstate_global->__pyx_tuple__2
 #define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
 #define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
+#define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
 #define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
 #define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
+#define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
 /* #### Code section: module_code ### */
 
 /* "../../miniconda3/envs/venv/lib/python3.11/site-packages/numpy/__init__.cython-30.pxd":245
@@ -4238,7 +4267,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "tsunami/fort/tsufort.pyx":46
+/* "tsunami/fort/tsufort.pyx":47
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
@@ -4309,7 +4338,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4317,9 +4346,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 1); __PYX_ERR(1, 46, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 1); __PYX_ERR(1, 47, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4327,9 +4356,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 2); __PYX_ERR(1, 46, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 2); __PYX_ERR(1, 47, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -4337,14 +4366,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 3); __PYX_ERR(1, 46, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 3); __PYX_ERR(1, 47, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "validate_sim_params") < 0)) __PYX_ERR(1, 46, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "validate_sim_params") < 0)) __PYX_ERR(1, 47, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
@@ -4354,14 +4383,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
       values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
     }
-    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
-    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
-    __pyx_v_dx = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dx == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
-    __pyx_v_c = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_c == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 46, __pyx_L3_error)
+    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+    __pyx_v_dx = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dx == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+    __pyx_v_c = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_c == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, __pyx_nargs); __PYX_ERR(1, 46, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, __pyx_nargs); __PYX_ERR(1, 47, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4397,21 +4426,21 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("validate_sim_params", 1);
 
-  /* "tsunami/fort/tsufort.pyx":50
+  /* "tsunami/fort/tsufort.pyx":51
  *     Validate the tsunami simulation parameters.
  *     '''
  *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)             # <<<<<<<<<<<<<<
  * 
- * # def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
+ * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(f_validate_sim_params((&__pyx_v_grid_size), (&__pyx_v_dt), (&__pyx_v_dx), (&__pyx_v_c))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 50, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(f_validate_sim_params((&__pyx_v_grid_size), (&__pyx_v_dt), (&__pyx_v_dx), (&__pyx_v_c))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tsunami/fort/tsufort.pyx":46
+  /* "tsunami/fort/tsufort.pyx":47
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
@@ -4431,8 +4460,8 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNU
 }
 
 /* "tsunami/fort/tsufort.pyx":53
+ *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
- * # def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
  *     '''
  *     Compute the first derivative numerically using the central finite difference scheme.
@@ -4633,6 +4662,7 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')
  *     f_finite_diff_center(&x[0], &dx[0], &n)             # <<<<<<<<<<<<<<
  *     return dx
+ * 
  */
   __pyx_t_7 = 0;
   __pyx_t_8 = -1;
@@ -4660,6 +4690,8 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')
  *     f_finite_diff_center(&x[0], &dx[0], &n)
  *     return dx             # <<<<<<<<<<<<<<
+ * 
+ * def gauss_init(int grid_size, double decay, int icenter):
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF((PyObject *)__pyx_v_dx);
@@ -4667,8 +4699,8 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   goto __pyx_L0;
 
   /* "tsunami/fort/tsufort.pyx":53
+ *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
- * # def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
  *     '''
  *     Compute the first derivative numerically using the central finite difference scheme.
@@ -4700,6 +4732,265 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   return __pyx_r;
 }
 
+/* "tsunami/fort/tsufort.pyx":62
+ *     return dx
+ * 
+ * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
+ *     '''
+ *     Compute the first derivative numerically using the central finite difference scheme.
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_5gauss_init(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_7tsunami_4fort_7tsufort_4gauss_init, "\n    Compute the first derivative numerically using the central finite difference scheme.\n    ");
+static PyMethodDef __pyx_mdef_7tsunami_4fort_7tsufort_5gauss_init = {"gauss_init", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_4fort_7tsufort_5gauss_init, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_7tsunami_4fort_7tsufort_4gauss_init};
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_5gauss_init(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  int __pyx_v_grid_size;
+  double __pyx_v_decay;
+  int __pyx_v_icenter;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[3] = {0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("gauss_init (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_grid_size,&__pyx_n_s_decay,&__pyx_n_s_icenter,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_grid_size)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_decay)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, 1); __PYX_ERR(1, 62, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_icenter)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, 2); __PYX_ERR(1, 62, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "gauss_init") < 0)) __PYX_ERR(1, 62, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 3)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+      values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+      values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+    }
+    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+    __pyx_v_decay = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_decay == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+    __pyx_v_icenter = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_icenter == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, __pyx_nargs); __PYX_ERR(1, 62, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("tsunami.fort.tsufort.gauss_init", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(__pyx_self, __pyx_v_grid_size, __pyx_v_decay, __pyx_v_icenter);
+
+  /* function exit code */
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_grid_size, double __pyx_v_decay, int __pyx_v_icenter) {
+  PyArrayObject *__pyx_v_h = 0;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_h;
+  __Pyx_Buffer __pyx_pybuffer_h;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  PyArrayObject *__pyx_t_5 = NULL;
+  Py_ssize_t __pyx_t_6;
+  int __pyx_t_7;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("gauss_init", 1);
+  __pyx_pybuffer_h.pybuffer.buf = NULL;
+  __pyx_pybuffer_h.refcount = 0;
+  __pyx_pybuffernd_h.data = NULL;
+  __pyx_pybuffernd_h.rcbuffer = &__pyx_pybuffer_h;
+
+  /* "tsunami/fort/tsufort.pyx":66
+ *     Compute the first derivative numerically using the central finite difference scheme.
+ *     '''
+ *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')             # <<<<<<<<<<<<<<
+ *     f_gauss_init(&grid_size, &decay, &icenter, &h[0])
+ *     return h
+ */
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_grid_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_GIVEREF(__pyx_t_1);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error);
+  __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_n_s_double) < 0) __PYX_ERR(1, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_order, __pyx_n_s_F) < 0) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_5 = ((PyArrayObject *)__pyx_t_4);
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_h.rcbuffer->pybuffer, (PyObject*)__pyx_t_5, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) {
+      __pyx_v_h = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_h.rcbuffer->pybuffer.buf = NULL;
+      __PYX_ERR(1, 66, __pyx_L1_error)
+    } else {__pyx_pybuffernd_h.diminfo[0].strides = __pyx_pybuffernd_h.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_h.diminfo[0].shape = __pyx_pybuffernd_h.rcbuffer->pybuffer.shape[0];
+    }
+  }
+  __pyx_t_5 = 0;
+  __pyx_v_h = ((PyArrayObject *)__pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "tsunami/fort/tsufort.pyx":67
+ *     '''
+ *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')
+ *     f_gauss_init(&grid_size, &decay, &icenter, &h[0])             # <<<<<<<<<<<<<<
+ *     return h
+ */
+  __pyx_t_6 = 0;
+  __pyx_t_7 = -1;
+  if (__pyx_t_6 < 0) {
+    __pyx_t_6 += __pyx_pybuffernd_h.diminfo[0].shape;
+    if (unlikely(__pyx_t_6 < 0)) __pyx_t_7 = 0;
+  } else if (unlikely(__pyx_t_6 >= __pyx_pybuffernd_h.diminfo[0].shape)) __pyx_t_7 = 0;
+  if (unlikely(__pyx_t_7 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_7);
+    __PYX_ERR(1, 67, __pyx_L1_error)
+  }
+  (void)(f_gauss_init((&__pyx_v_grid_size), (&__pyx_v_decay), (&__pyx_v_icenter), (&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_h.rcbuffer->pybuffer.buf, __pyx_t_6, __pyx_pybuffernd_h.diminfo[0].strides)))));
+
+  /* "tsunami/fort/tsufort.pyx":68
+ *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')
+ *     f_gauss_init(&grid_size, &decay, &icenter, &h[0])
+ *     return h             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_h);
+  __pyx_r = ((PyObject *)__pyx_v_h);
+  goto __pyx_L0;
+
+  /* "tsunami/fort/tsufort.pyx":62
+ *     return dx
+ * 
+ * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
+ *     '''
+ *     Compute the first derivative numerically using the central finite difference scheme.
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("tsunami.fort.tsufort.gauss_init", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XDECREF((PyObject *)__pyx_v_h);
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
@@ -4718,18 +5009,22 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_n_s_F, __pyx_k_F, sizeof(__pyx_k_F), 0, 0, 1, 1},
     {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
+    {&__pyx_n_s__10, __pyx_k__10, sizeof(__pyx_k__10), 0, 0, 1, 1},
     {&__pyx_n_s__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 0, 1, 1},
-    {&__pyx_n_s__8, __pyx_k__8, sizeof(__pyx_k__8), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
     {&__pyx_n_s_cline_in_traceback, __pyx_k_cline_in_traceback, sizeof(__pyx_k_cline_in_traceback), 0, 0, 1, 1},
+    {&__pyx_n_s_decay, __pyx_k_decay, sizeof(__pyx_k_decay), 0, 0, 1, 1},
     {&__pyx_n_s_double, __pyx_k_double, sizeof(__pyx_k_double), 0, 0, 1, 1},
     {&__pyx_n_s_dt, __pyx_k_dt, sizeof(__pyx_k_dt), 0, 0, 1, 1},
     {&__pyx_n_s_dtype, __pyx_k_dtype, sizeof(__pyx_k_dtype), 0, 0, 1, 1},
     {&__pyx_n_s_dx, __pyx_k_dx, sizeof(__pyx_k_dx), 0, 0, 1, 1},
     {&__pyx_n_s_empty, __pyx_k_empty, sizeof(__pyx_k_empty), 0, 0, 1, 1},
     {&__pyx_n_s_finite_diff_center, __pyx_k_finite_diff_center, sizeof(__pyx_k_finite_diff_center), 0, 0, 1, 1},
+    {&__pyx_n_s_gauss_init, __pyx_k_gauss_init, sizeof(__pyx_k_gauss_init), 0, 0, 1, 1},
     {&__pyx_n_s_grid_size, __pyx_k_grid_size, sizeof(__pyx_k_grid_size), 0, 0, 1, 1},
+    {&__pyx_n_s_h, __pyx_k_h, sizeof(__pyx_k_h), 0, 0, 1, 1},
+    {&__pyx_n_s_icenter, __pyx_k_icenter, sizeof(__pyx_k_icenter), 0, 0, 1, 1},
     {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
     {&__pyx_n_s_initializing, __pyx_k_initializing, sizeof(__pyx_k_initializing), 0, 0, 1, 1},
     {&__pyx_n_s_is_coroutine, __pyx_k_is_coroutine, sizeof(__pyx_k_is_coroutine), 0, 0, 1, 1},
@@ -4786,21 +5081,21 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "tsunami/fort/tsufort.pyx":46
+  /* "tsunami/fort/tsufort.pyx":47
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
  *     '''
  *     Validate the tsunami simulation parameters.
  */
-  __pyx_tuple__4 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_dt, __pyx_n_s_dx, __pyx_n_s_c); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_dt, __pyx_n_s_dx, __pyx_n_s_c); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_validate_sim_params, 46, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_validate_sim_params, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(1, 47, __pyx_L1_error)
 
   /* "tsunami/fort/tsufort.pyx":53
+ *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
- * # def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
  *     '''
  *     Compute the first derivative numerically using the central finite difference scheme.
@@ -4809,6 +5104,18 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
   __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_finite_diff_center, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(1, 53, __pyx_L1_error)
+
+  /* "tsunami/fort/tsufort.pyx":62
+ *     return dx
+ * 
+ * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
+ *     '''
+ *     Compute the first derivative numerically using the central finite difference scheme.
+ */
+  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_decay, __pyx_n_s_icenter, __pyx_n_s_h); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__8);
+  __Pyx_GIVEREF(__pyx_tuple__8);
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_gauss_init, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5241,21 +5548,21 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "tsunami/fort/tsufort.pyx":46
+  /* "tsunami/fort/tsufort.pyx":47
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
  *     '''
  *     Validate the tsunami simulation parameters.
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_1validate_sim_params, 0, __pyx_n_s_validate_sim_params, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 46, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_1validate_sim_params, 0, __pyx_n_s_validate_sim_params, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_validate_sim_params, __pyx_t_2) < 0) __PYX_ERR(1, 46, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_validate_sim_params, __pyx_t_2) < 0) __PYX_ERR(1, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "tsunami/fort/tsufort.pyx":53
+ *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
- * # def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
  *     '''
  *     Compute the first derivative numerically using the central finite difference scheme.
@@ -5263,6 +5570,18 @@ if (!__Pyx_RefNanny) {
   __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_3finite_diff_center, 0, __pyx_n_s_finite_diff_center, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_finite_diff_center, __pyx_t_2) < 0) __PYX_ERR(1, 53, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "tsunami/fort/tsufort.pyx":62
+ *     return dx
+ * 
+ * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
+ *     '''
+ *     Compute the first derivative numerically using the central finite difference scheme.
+ */
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_5gauss_init, 0, __pyx_n_s_gauss_init, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gauss_init, __pyx_t_2) < 0) __PYX_ERR(1, 62, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "tsunami/fort/tsufort.pyx":1
@@ -9511,7 +9830,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__8);
+        name = __Pyx_NewRef(__pyx_n_s__10);
     }
     return name;
 }

@@ -2,7 +2,8 @@ module tsufort_py_wrappers
 
     use, intrinsic :: iso_fortran_env, only: r64 => real64
     use, intrinsic :: iso_c_binding, only: c_int, c_double, c_bool
-    use tsufort, only: validate_sim_params, finite_diff_center
+
+    use tsufort, only: validate_sim_params, finite_diff_center, gauss_init
 
     implicit none
 
@@ -35,4 +36,14 @@ module tsufort_py_wrappers
             allocate(x_, source=x)
             dx = finite_diff_center(x_)
         end subroutine f_finite_diff_center
+
+        ! Water height initialization
+        subroutine f_gauss_init(grid_size, decay, icenter, h) bind(c)
+            ! Args
+            integer(c_int), intent(in) :: grid_size, icenter
+            real(c_double), intent(in) :: decay
+            real(c_double), intent(out) :: h(grid_size)
+
+            h = gauss_init(grid_size, decay, icenter)
+        end subroutine f_gauss_init
 end module tsufort_py_wrappers

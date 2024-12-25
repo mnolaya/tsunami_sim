@@ -4,7 +4,7 @@ module tsufort
 
     implicit none
     private
-    public :: validate_sim_params, finite_diff_center
+    public :: validate_sim_params, finite_diff_center, gauss_init
 
     type :: SimParams
         integer :: icenter, grid_size, timesteps
@@ -105,6 +105,21 @@ module tsufort
             dx(2:i-1) = x(3:i) - x(1:i-2)  ! Internal nodes
             dx = dx * 0.5_r64
         end function finite_diff_center
+
+        !> Initialize water height with Gaussian curve shape
+        function gauss_init(grid_size, decay, icenter) result(h)
+            ! Args
+            integer, intent(in) :: grid_size, icenter
+            real(r64), intent(in) :: decay
+            real(r64) :: h(grid_size)
+
+            ! Loc vars
+            integer :: i
+
+            do concurrent (i = 1:grid_size)
+                h(i) = exp(-decay*(i - icenter)**2)
+            end do
+        end function gauss_init
 
         !> Run solver
         subroutine run_solver(sim_params, h)
