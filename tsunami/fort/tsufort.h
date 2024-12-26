@@ -16,3 +16,7 @@ int f_validate_sim_params(int *grid_size, double *dt, double *dx, double *c);
 double f_finite_diff_center(double *x, double *dx, int *n);
 
 double f_gauss_init(int *grid_size, double *decay, int *icenter, double *h);
+
+double f_update_water_height(double *h, double *u, double *dx, double *dt, int *grid_size);
+
+double f_update_water_velocity(double *h, double *u, double *dx, double *dt, int *grid_size);

@@ -3,7 +3,11 @@ module tsufort_py_wrappers
     use, intrinsic :: iso_fortran_env, only: r64 => real64
     use, intrinsic :: iso_c_binding, only: c_int, c_double, c_bool
 
-    use tsufort, only: validate_sim_params, finite_diff_center, gauss_init
+    use tsufort, only: validate_sim_params, &
+        finite_diff_center, &
+        gauss_init, &
+        update_water_height, &
+        update_water_velocity
 
     implicit none
 
@@ -31,10 +35,11 @@ module tsufort_py_wrappers
             real(c_double), intent(out) :: dx(n)
 
             ! Loc vars
-            real(r64), allocatable :: x_(:)
+            ! real(r64), allocatable :: x_(:)
 
-            allocate(x_, source=x)
-            dx = finite_diff_center(x_)
+            ! allocate(x_, source=x)
+            ! dx = finite_diff_center(x_)
+            dx = finite_diff_center(x)
         end subroutine f_finite_diff_center
 
         ! Water height initialization
@@ -46,4 +51,22 @@ module tsufort_py_wrappers
 
             h = gauss_init(grid_size, decay, icenter)
         end subroutine f_gauss_init
+
+        subroutine f_update_water_height(h, u, dx, dt, grid_size) bind(c)
+            ! Args
+            integer(c_int), intent(in) :: grid_size
+            real(c_double), intent(in) :: u(grid_size), dx, dt
+            real(c_double), intent(inout) :: h(grid_size)
+          
+            call update_water_height(h, u, dx, dt)
+        end subroutine f_update_water_height
+
+        subroutine f_update_water_velocity(h, u, dx, dt, grid_size) bind(c)
+            ! Args
+            integer(c_int), intent(in) :: grid_size
+            real(c_double), intent(in) :: h(grid_size), dx, dt
+            real(c_double), intent(inout) :: u(grid_size)
+
+            call update_water_velocity(h, u, dx, dt)
+        end subroutine f_update_water_velocity
 end module tsufort_py_wrappers

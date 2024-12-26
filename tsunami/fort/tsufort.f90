@@ -4,7 +4,11 @@ module tsufort
 
     implicit none
     private
-    public :: validate_sim_params, finite_diff_center, gauss_init
+    public :: validate_sim_params, &
+        finite_diff_center, &
+        gauss_init, &
+        update_water_height, &
+        update_water_velocity
 
     type :: SimParams
         integer :: icenter, grid_size, timesteps
@@ -121,32 +125,33 @@ module tsufort
             end do
         end function gauss_init
 
-        !> Run solver
-        subroutine run_solver(sim_params, h)
+        !> Update the water velocity for the next timestep using the shallow water equations
+        !> du/dt + u*grad(u) = -g*grad(h)
+        subroutine update_water_velocity(h, u, dx, dt)
             ! Args
-            type(SimParams), intent(in) :: sim_params
-            real(r64), allocatable, intent(out) :: h(:, :)
+            real(r64), intent(in) :: h(:), dx, dt
+            real(r64), intent(inout) :: u(:)
+
+            ! Loc vars
+            real(r64), parameter :: g = 9.81
+
+            u = u - ((u*finite_diff_center(u) + g*finite_diff_center(h))/dx)*dt
+        end subroutine update_water_velocity
+
+        !> Update the water height for the next timestep using the shallow water equations
+        !> dh/dt = -grad(u*(H + h))
+        subroutine update_water_height(h, u, dx, dt)
+            ! Args
+            real(r64), intent(in) :: u(:), dx, dt
+            real(r64), intent(inout) :: h(:)
 
             ! Loc vars
             real(r64), parameter :: hmean = 10, g = 9.81
 
-            integer :: i, n
-            real(r64), allocatable :: dh(:), u(:)
+            h = h - (finite_diff_center(u*(hmean + h))/dx)*dt
+        end subroutine update_water_height
 
-            allocate(h(sim_params%grid_size, sim_params%timesteps + 1))
-            allocate(dh(sim_params%grid_size))
-            allocate(u(sim_params%grid_size))
+        ! subroutine run_simulation()
 
-            ! Initialize water height and velocity at t = 0
-            do concurrent (i = 1:sim_params%grid_size)
-                h(i, 1) = exp(-sim_params%decay*(i - sim_params%icenter)**2)
-            end do
-            u = 0
-
-            ! Update water height and velocity
-            time_loop: do n = 1, sim_params%timesteps
-                u = u - ((u*finite_diff_center(u) + g*finite_diff_center(h(:, n)))/sim_params%dx)*sim_params%dt
-                h(:, n + 1) = h(:, n) - (finite_diff_center(u*(hmean + h(:, n)))/sim_params%dx)*sim_params%dt
-            end do time_loop
-        end subroutine run_solver
+        ! end subroutine run_simulation
 end module tsufort

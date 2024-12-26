@@ -2575,12 +2575,13 @@ static const char __pyx_k_F[] = "F";
 static const char __pyx_k_c[] = "c";
 static const char __pyx_k_h[] = "h";
 static const char __pyx_k_n[] = "n";
+static const char __pyx_k_u[] = "u";
 static const char __pyx_k_x[] = "x";
 static const char __pyx_k__3[] = "*";
 static const char __pyx_k_dt[] = "dt";
 static const char __pyx_k_dx[] = "dx";
 static const char __pyx_k_np[] = "np";
-static const char __pyx_k__10[] = "?";
+static const char __pyx_k__13[] = "?";
 static const char __pyx_k_main[] = "__main__";
 static const char __pyx_k_name[] = "__name__";
 static const char __pyx_k_spec[] = "__spec__";
@@ -2601,8 +2602,10 @@ static const char __pyx_k_is_coroutine[] = "_is_coroutine";
 static const char __pyx_k_asyncio_coroutines[] = "asyncio.coroutines";
 static const char __pyx_k_cline_in_traceback[] = "cline_in_traceback";
 static const char __pyx_k_finite_diff_center[] = "finite_diff_center";
+static const char __pyx_k_update_water_height[] = "update_water_height";
 static const char __pyx_k_validate_sim_params[] = "validate_sim_params";
 static const char __pyx_k_tsunami_fort_tsufort[] = "tsunami.fort.tsufort";
+static const char __pyx_k_update_water_velocity[] = "update_water_velocity";
 static const char __pyx_k_tsunami_fort_tsufort_pyx[] = "tsunami/fort/tsufort.pyx";
 static const char __pyx_k_numpy_core_multiarray_failed_to[] = "numpy.core.multiarray failed to import";
 static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath failed to import";
@@ -2610,6 +2613,8 @@ static const char __pyx_k_numpy_core_umath_failed_to_impor[] = "numpy.core.umath
 static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_grid_size, double __pyx_v_dt, double __pyx_v_dx, double __pyx_v_c); /* proto */
 static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_x); /* proto */
 static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyObject *__pyx_self, int __pyx_v_grid_size, double __pyx_v_decay, int __pyx_v_icenter); /* proto */
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_6update_water_height(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_h, PyArrayObject *__pyx_v_u, double __pyx_v_dx, double __pyx_v_dt); /* proto */
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_8update_water_velocity(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_h, PyArrayObject *__pyx_v_u, double __pyx_v_dx, double __pyx_v_dt); /* proto */
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 typedef struct {
@@ -2675,7 +2680,7 @@ typedef struct {
   #endif
   PyObject *__pyx_n_s_F;
   PyObject *__pyx_n_s_ImportError;
-  PyObject *__pyx_n_s__10;
+  PyObject *__pyx_n_s__13;
   PyObject *__pyx_n_s__3;
   PyObject *__pyx_n_s_asyncio_coroutines;
   PyObject *__pyx_n_s_c;
@@ -2706,6 +2711,9 @@ typedef struct {
   PyObject *__pyx_n_s_test;
   PyObject *__pyx_n_s_tsunami_fort_tsufort;
   PyObject *__pyx_kp_s_tsunami_fort_tsufort_pyx;
+  PyObject *__pyx_n_s_u;
+  PyObject *__pyx_n_s_update_water_height;
+  PyObject *__pyx_n_s_update_water_velocity;
   PyObject *__pyx_n_s_validate_sim_params;
   PyObject *__pyx_n_s_x;
   PyObject *__pyx_tuple_;
@@ -2713,9 +2721,12 @@ typedef struct {
   PyObject *__pyx_tuple__4;
   PyObject *__pyx_tuple__6;
   PyObject *__pyx_tuple__8;
+  PyObject *__pyx_tuple__10;
   PyObject *__pyx_codeobj__5;
   PyObject *__pyx_codeobj__7;
   PyObject *__pyx_codeobj__9;
+  PyObject *__pyx_codeobj__11;
+  PyObject *__pyx_codeobj__12;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -2776,7 +2787,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_ptype_5numpy_ufunc);
   Py_CLEAR(clear_module_state->__pyx_n_s_F);
   Py_CLEAR(clear_module_state->__pyx_n_s_ImportError);
-  Py_CLEAR(clear_module_state->__pyx_n_s__10);
+  Py_CLEAR(clear_module_state->__pyx_n_s__13);
   Py_CLEAR(clear_module_state->__pyx_n_s__3);
   Py_CLEAR(clear_module_state->__pyx_n_s_asyncio_coroutines);
   Py_CLEAR(clear_module_state->__pyx_n_s_c);
@@ -2807,6 +2818,9 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_test);
   Py_CLEAR(clear_module_state->__pyx_n_s_tsunami_fort_tsufort);
   Py_CLEAR(clear_module_state->__pyx_kp_s_tsunami_fort_tsufort_pyx);
+  Py_CLEAR(clear_module_state->__pyx_n_s_u);
+  Py_CLEAR(clear_module_state->__pyx_n_s_update_water_height);
+  Py_CLEAR(clear_module_state->__pyx_n_s_update_water_velocity);
   Py_CLEAR(clear_module_state->__pyx_n_s_validate_sim_params);
   Py_CLEAR(clear_module_state->__pyx_n_s_x);
   Py_CLEAR(clear_module_state->__pyx_tuple_);
@@ -2814,9 +2828,12 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__4);
   Py_CLEAR(clear_module_state->__pyx_tuple__6);
   Py_CLEAR(clear_module_state->__pyx_tuple__8);
+  Py_CLEAR(clear_module_state->__pyx_tuple__10);
   Py_CLEAR(clear_module_state->__pyx_codeobj__5);
   Py_CLEAR(clear_module_state->__pyx_codeobj__7);
   Py_CLEAR(clear_module_state->__pyx_codeobj__9);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__11);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__12);
   return 0;
 }
 #endif
@@ -2855,7 +2872,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_ptype_5numpy_ufunc);
   Py_VISIT(traverse_module_state->__pyx_n_s_F);
   Py_VISIT(traverse_module_state->__pyx_n_s_ImportError);
-  Py_VISIT(traverse_module_state->__pyx_n_s__10);
+  Py_VISIT(traverse_module_state->__pyx_n_s__13);
   Py_VISIT(traverse_module_state->__pyx_n_s__3);
   Py_VISIT(traverse_module_state->__pyx_n_s_asyncio_coroutines);
   Py_VISIT(traverse_module_state->__pyx_n_s_c);
@@ -2886,6 +2903,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_test);
   Py_VISIT(traverse_module_state->__pyx_n_s_tsunami_fort_tsufort);
   Py_VISIT(traverse_module_state->__pyx_kp_s_tsunami_fort_tsufort_pyx);
+  Py_VISIT(traverse_module_state->__pyx_n_s_u);
+  Py_VISIT(traverse_module_state->__pyx_n_s_update_water_height);
+  Py_VISIT(traverse_module_state->__pyx_n_s_update_water_velocity);
   Py_VISIT(traverse_module_state->__pyx_n_s_validate_sim_params);
   Py_VISIT(traverse_module_state->__pyx_n_s_x);
   Py_VISIT(traverse_module_state->__pyx_tuple_);
@@ -2893,9 +2913,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__4);
   Py_VISIT(traverse_module_state->__pyx_tuple__6);
   Py_VISIT(traverse_module_state->__pyx_tuple__8);
+  Py_VISIT(traverse_module_state->__pyx_tuple__10);
   Py_VISIT(traverse_module_state->__pyx_codeobj__5);
   Py_VISIT(traverse_module_state->__pyx_codeobj__7);
   Py_VISIT(traverse_module_state->__pyx_codeobj__9);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__11);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__12);
   return 0;
 }
 #endif
@@ -2962,7 +2985,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #endif
 #define __pyx_n_s_F __pyx_mstate_global->__pyx_n_s_F
 #define __pyx_n_s_ImportError __pyx_mstate_global->__pyx_n_s_ImportError
-#define __pyx_n_s__10 __pyx_mstate_global->__pyx_n_s__10
+#define __pyx_n_s__13 __pyx_mstate_global->__pyx_n_s__13
 #define __pyx_n_s__3 __pyx_mstate_global->__pyx_n_s__3
 #define __pyx_n_s_asyncio_coroutines __pyx_mstate_global->__pyx_n_s_asyncio_coroutines
 #define __pyx_n_s_c __pyx_mstate_global->__pyx_n_s_c
@@ -2993,6 +3016,9 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_test __pyx_mstate_global->__pyx_n_s_test
 #define __pyx_n_s_tsunami_fort_tsufort __pyx_mstate_global->__pyx_n_s_tsunami_fort_tsufort
 #define __pyx_kp_s_tsunami_fort_tsufort_pyx __pyx_mstate_global->__pyx_kp_s_tsunami_fort_tsufort_pyx
+#define __pyx_n_s_u __pyx_mstate_global->__pyx_n_s_u
+#define __pyx_n_s_update_water_height __pyx_mstate_global->__pyx_n_s_update_water_height
+#define __pyx_n_s_update_water_velocity __pyx_mstate_global->__pyx_n_s_update_water_velocity
 #define __pyx_n_s_validate_sim_params __pyx_mstate_global->__pyx_n_s_validate_sim_params
 #define __pyx_n_s_x __pyx_mstate_global->__pyx_n_s_x
 #define __pyx_tuple_ __pyx_mstate_global->__pyx_tuple_
@@ -3000,9 +3026,12 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__4 __pyx_mstate_global->__pyx_tuple__4
 #define __pyx_tuple__6 __pyx_mstate_global->__pyx_tuple__6
 #define __pyx_tuple__8 __pyx_mstate_global->__pyx_tuple__8
+#define __pyx_tuple__10 __pyx_mstate_global->__pyx_tuple__10
 #define __pyx_codeobj__5 __pyx_mstate_global->__pyx_codeobj__5
 #define __pyx_codeobj__7 __pyx_mstate_global->__pyx_codeobj__7
 #define __pyx_codeobj__9 __pyx_mstate_global->__pyx_codeobj__9
+#define __pyx_codeobj__11 __pyx_mstate_global->__pyx_codeobj__11
+#define __pyx_codeobj__12 __pyx_mstate_global->__pyx_codeobj__12
 /* #### Code section: module_code ### */
 
 /* "../../miniconda3/envs/venv/lib/python3.11/site-packages/numpy/__init__.cython-30.pxd":245
@@ -4267,7 +4296,7 @@ static CYTHON_INLINE NPY_DATETIMEUNIT __pyx_f_5numpy_get_datetime64_unit(PyObjec
   return __pyx_r;
 }
 
-/* "tsunami/fort/tsufort.pyx":47
+/* "tsunami/fort/tsufort.pyx":49
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
@@ -4338,7 +4367,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4346,9 +4375,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 1); __PYX_ERR(1, 47, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 1); __PYX_ERR(1, 49, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4356,9 +4385,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 2); __PYX_ERR(1, 47, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 2); __PYX_ERR(1, 49, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
@@ -4366,14 +4395,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 3); __PYX_ERR(1, 47, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, 3); __PYX_ERR(1, 49, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "validate_sim_params") < 0)) __PYX_ERR(1, 47, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "validate_sim_params") < 0)) __PYX_ERR(1, 49, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
@@ -4383,14 +4412,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
       values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
     }
-    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
-    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
-    __pyx_v_dx = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dx == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
-    __pyx_v_c = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_c == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 47, __pyx_L3_error)
+    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
+    __pyx_v_dx = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dx == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
+    __pyx_v_c = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_c == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 49, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, __pyx_nargs); __PYX_ERR(1, 47, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("validate_sim_params", 1, 4, 4, __pyx_nargs); __PYX_ERR(1, 49, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4426,7 +4455,7 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNU
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("validate_sim_params", 1);
 
-  /* "tsunami/fort/tsufort.pyx":51
+  /* "tsunami/fort/tsufort.pyx":53
  *     Validate the tsunami simulation parameters.
  *     '''
  *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)             # <<<<<<<<<<<<<<
@@ -4434,13 +4463,13 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNU
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_PyBool_FromLong(f_validate_sim_params((&__pyx_v_grid_size), (&__pyx_v_dt), (&__pyx_v_dx), (&__pyx_v_c))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 51, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyBool_FromLong(f_validate_sim_params((&__pyx_v_grid_size), (&__pyx_v_dt), (&__pyx_v_dx), (&__pyx_v_c))); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 53, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "tsunami/fort/tsufort.pyx":47
+  /* "tsunami/fort/tsufort.pyx":49
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
@@ -4459,7 +4488,7 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_validate_sim_params(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "tsunami/fort/tsufort.pyx":53
+/* "tsunami/fort/tsufort.pyx":55
  *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
@@ -4521,12 +4550,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 53, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 55, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "finite_diff_center") < 0)) __PYX_ERR(1, 53, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "finite_diff_center") < 0)) __PYX_ERR(1, 55, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -4537,7 +4566,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("finite_diff_center", 1, 1, 1, __pyx_nargs); __PYX_ERR(1, 53, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("finite_diff_center", 1, 1, 1, __pyx_nargs); __PYX_ERR(1, 55, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4551,7 +4580,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(1, 53, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_x), __pyx_ptype_5numpy_ndarray, 1, "x", 0))) __PYX_ERR(1, 55, __pyx_L1_error)
   __pyx_r = __pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(__pyx_self, __pyx_v_x);
 
   /* function exit code */
@@ -4601,55 +4630,55 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   __pyx_pybuffernd_x.rcbuffer = &__pyx_pybuffer_x;
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
-    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_x.rcbuffer->pybuffer, (PyObject*)__pyx_v_x, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) __PYX_ERR(1, 53, __pyx_L1_error)
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_x.rcbuffer->pybuffer, (PyObject*)__pyx_v_x, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) __PYX_ERR(1, 55, __pyx_L1_error)
   }
   __pyx_pybuffernd_x.diminfo[0].strides = __pyx_pybuffernd_x.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_x.diminfo[0].shape = __pyx_pybuffernd_x.rcbuffer->pybuffer.shape[0];
 
-  /* "tsunami/fort/tsufort.pyx":57
+  /* "tsunami/fort/tsufort.pyx":59
  *     Compute the first derivative numerically using the central finite difference scheme.
  *     '''
  *     cdef int n = x.shape[0]             # <<<<<<<<<<<<<<
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')
  *     f_finite_diff_center(&x[0], &dx[0], &n)
  */
-  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_x)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(1, 57, __pyx_L1_error)
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_x)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(1, 59, __pyx_L1_error)
   __pyx_v_n = (__pyx_t_1[0]);
 
-  /* "tsunami/fort/tsufort.pyx":58
+  /* "tsunami/fort/tsufort.pyx":60
  *     '''
  *     cdef int n = x.shape[0]
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')             # <<<<<<<<<<<<<<
  *     f_finite_diff_center(&x[0], &dx[0], &n)
  *     return dx
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_np); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_empty); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_empty); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_n); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_GIVEREF(__pyx_t_2);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(1, 58, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_2)) __PYX_ERR(1, 60, __pyx_L1_error);
   __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 58, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_n_s_double) < 0) __PYX_ERR(1, 58, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_s_F) < 0) __PYX_ERR(1, 58, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 58, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dtype, __pyx_n_s_double) < 0) __PYX_ERR(1, 60, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_order, __pyx_n_s_F) < 0) __PYX_ERR(1, 60, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(1, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(1, 58, __pyx_L1_error)
+  if (!(likely(((__pyx_t_5) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_5, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(1, 60, __pyx_L1_error)
   __pyx_t_6 = ((PyArrayObject *)__pyx_t_5);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_dx.rcbuffer->pybuffer, (PyObject*)__pyx_t_6, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_dx = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_dx.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(1, 58, __pyx_L1_error)
+      __PYX_ERR(1, 60, __pyx_L1_error)
     } else {__pyx_pybuffernd_dx.diminfo[0].strides = __pyx_pybuffernd_dx.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_dx.diminfo[0].shape = __pyx_pybuffernd_dx.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -4657,7 +4686,7 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   __pyx_v_dx = ((PyArrayObject *)__pyx_t_5);
   __pyx_t_5 = 0;
 
-  /* "tsunami/fort/tsufort.pyx":59
+  /* "tsunami/fort/tsufort.pyx":61
  *     cdef int n = x.shape[0]
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')
  *     f_finite_diff_center(&x[0], &dx[0], &n)             # <<<<<<<<<<<<<<
@@ -4672,7 +4701,7 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   } else if (unlikely(__pyx_t_7 >= __pyx_pybuffernd_x.diminfo[0].shape)) __pyx_t_8 = 0;
   if (unlikely(__pyx_t_8 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_8);
-    __PYX_ERR(1, 59, __pyx_L1_error)
+    __PYX_ERR(1, 61, __pyx_L1_error)
   }
   __pyx_t_9 = 0;
   __pyx_t_8 = -1;
@@ -4682,11 +4711,11 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   } else if (unlikely(__pyx_t_9 >= __pyx_pybuffernd_dx.diminfo[0].shape)) __pyx_t_8 = 0;
   if (unlikely(__pyx_t_8 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_8);
-    __PYX_ERR(1, 59, __pyx_L1_error)
+    __PYX_ERR(1, 61, __pyx_L1_error)
   }
   (void)(f_finite_diff_center((&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_x.rcbuffer->pybuffer.buf, __pyx_t_7, __pyx_pybuffernd_x.diminfo[0].strides))), (&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_dx.rcbuffer->pybuffer.buf, __pyx_t_9, __pyx_pybuffernd_dx.diminfo[0].strides))), (&__pyx_v_n)));
 
-  /* "tsunami/fort/tsufort.pyx":60
+  /* "tsunami/fort/tsufort.pyx":62
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] dx = np.empty(n, dtype='double', order='F')
  *     f_finite_diff_center(&x[0], &dx[0], &n)
  *     return dx             # <<<<<<<<<<<<<<
@@ -4698,7 +4727,7 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   __pyx_r = ((PyObject *)__pyx_v_dx);
   goto __pyx_L0;
 
-  /* "tsunami/fort/tsufort.pyx":53
+  /* "tsunami/fort/tsufort.pyx":55
  *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
@@ -4732,12 +4761,12 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_2finite_diff_center(CYTHON_UNU
   return __pyx_r;
 }
 
-/* "tsunami/fort/tsufort.pyx":62
+/* "tsunami/fort/tsufort.pyx":64
  *     return dx
  * 
  * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
  *     '''
- *     Compute the first derivative numerically using the central finite difference scheme.
+ *     Initialize the simulation water height based on a Gauss shape.
  */
 
 /* Python wrapper */
@@ -4748,7 +4777,7 @@ PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_7tsunami_4fort_7tsufort_4gauss_init, "\n    Compute the first derivative numerically using the central finite difference scheme.\n    ");
+PyDoc_STRVAR(__pyx_doc_7tsunami_4fort_7tsufort_4gauss_init, "\n    Initialize the simulation water height based on a Gauss shape.\n    ");
 static PyMethodDef __pyx_mdef_7tsunami_4fort_7tsufort_5gauss_init = {"gauss_init", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_4fort_7tsufort_5gauss_init, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_7tsunami_4fort_7tsufort_4gauss_init};
 static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_5gauss_init(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
@@ -4800,7 +4829,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -4808,9 +4837,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, 1); __PYX_ERR(1, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, 1); __PYX_ERR(1, 64, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -4818,14 +4847,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, 2); __PYX_ERR(1, 62, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, 2); __PYX_ERR(1, 64, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "gauss_init") < 0)) __PYX_ERR(1, 62, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "gauss_init") < 0)) __PYX_ERR(1, 64, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -4834,13 +4863,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
     }
-    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
-    __pyx_v_decay = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_decay == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
-    __pyx_v_icenter = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_icenter == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 62, __pyx_L3_error)
+    __pyx_v_grid_size = __Pyx_PyInt_As_int(values[0]); if (unlikely((__pyx_v_grid_size == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
+    __pyx_v_decay = __pyx_PyFloat_AsDouble(values[1]); if (unlikely((__pyx_v_decay == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
+    __pyx_v_icenter = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_icenter == (int)-1) && PyErr_Occurred())) __PYX_ERR(1, 64, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, __pyx_nargs); __PYX_ERR(1, 62, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("gauss_init", 1, 3, 3, __pyx_nargs); __PYX_ERR(1, 64, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -4889,41 +4918,41 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyOb
   __pyx_pybuffernd_h.data = NULL;
   __pyx_pybuffernd_h.rcbuffer = &__pyx_pybuffer_h;
 
-  /* "tsunami/fort/tsufort.pyx":66
- *     Compute the first derivative numerically using the central finite difference scheme.
+  /* "tsunami/fort/tsufort.pyx":68
+ *     Initialize the simulation water height based on a Gauss shape.
  *     '''
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')             # <<<<<<<<<<<<<<
  *     f_gauss_init(&grid_size, &decay, &icenter, &h[0])
  *     return h
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_np); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_empty); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_grid_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_grid_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_GIVEREF(__pyx_t_1);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error);
   __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 66, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_n_s_double) < 0) __PYX_ERR(1, 66, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_order, __pyx_n_s_F) < 0) __PYX_ERR(1, 66, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 66, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_dtype, __pyx_n_s_double) < 0) __PYX_ERR(1, 68, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_order, __pyx_n_s_F) < 0) __PYX_ERR(1, 68, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(1, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(1, 66, __pyx_L1_error)
+  if (!(likely(((__pyx_t_4) == Py_None) || likely(__Pyx_TypeTest(__pyx_t_4, __pyx_ptype_5numpy_ndarray))))) __PYX_ERR(1, 68, __pyx_L1_error)
   __pyx_t_5 = ((PyArrayObject *)__pyx_t_4);
   {
     __Pyx_BufFmt_StackElem __pyx_stack[1];
     if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_h.rcbuffer->pybuffer, (PyObject*)__pyx_t_5, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) {
       __pyx_v_h = ((PyArrayObject *)Py_None); __Pyx_INCREF(Py_None); __pyx_pybuffernd_h.rcbuffer->pybuffer.buf = NULL;
-      __PYX_ERR(1, 66, __pyx_L1_error)
+      __PYX_ERR(1, 68, __pyx_L1_error)
     } else {__pyx_pybuffernd_h.diminfo[0].strides = __pyx_pybuffernd_h.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_h.diminfo[0].shape = __pyx_pybuffernd_h.rcbuffer->pybuffer.shape[0];
     }
   }
@@ -4931,11 +4960,12 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyOb
   __pyx_v_h = ((PyArrayObject *)__pyx_t_4);
   __pyx_t_4 = 0;
 
-  /* "tsunami/fort/tsufort.pyx":67
+  /* "tsunami/fort/tsufort.pyx":69
  *     '''
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')
  *     f_gauss_init(&grid_size, &decay, &icenter, &h[0])             # <<<<<<<<<<<<<<
  *     return h
+ * 
  */
   __pyx_t_6 = 0;
   __pyx_t_7 = -1;
@@ -4945,26 +4975,28 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyOb
   } else if (unlikely(__pyx_t_6 >= __pyx_pybuffernd_h.diminfo[0].shape)) __pyx_t_7 = 0;
   if (unlikely(__pyx_t_7 != -1)) {
     __Pyx_RaiseBufferIndexError(__pyx_t_7);
-    __PYX_ERR(1, 67, __pyx_L1_error)
+    __PYX_ERR(1, 69, __pyx_L1_error)
   }
   (void)(f_gauss_init((&__pyx_v_grid_size), (&__pyx_v_decay), (&__pyx_v_icenter), (&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_h.rcbuffer->pybuffer.buf, __pyx_t_6, __pyx_pybuffernd_h.diminfo[0].strides)))));
 
-  /* "tsunami/fort/tsufort.pyx":68
+  /* "tsunami/fort/tsufort.pyx":70
  *     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')
  *     f_gauss_init(&grid_size, &decay, &icenter, &h[0])
  *     return h             # <<<<<<<<<<<<<<
+ * 
+ * def update_water_height(
  */
   __Pyx_XDECREF(__pyx_r);
   __Pyx_INCREF((PyObject *)__pyx_v_h);
   __pyx_r = ((PyObject *)__pyx_v_h);
   goto __pyx_L0;
 
-  /* "tsunami/fort/tsufort.pyx":62
+  /* "tsunami/fort/tsufort.pyx":64
  *     return dx
  * 
  * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
  *     '''
- *     Compute the first derivative numerically using the central finite difference scheme.
+ *     Initialize the simulation water height based on a Gauss shape.
  */
 
   /* function exit code */
@@ -4991,6 +5023,545 @@ static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_4gauss_init(CYTHON_UNUSED PyOb
   return __pyx_r;
 }
 
+/* "tsunami/fort/tsufort.pyx":72
+ *     return h
+ * 
+ * def update_water_height(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_7update_water_height(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_7tsunami_4fort_7tsufort_6update_water_height, "\n    Update the water height using the shallow water equations.\n    ");
+static PyMethodDef __pyx_mdef_7tsunami_4fort_7tsufort_7update_water_height = {"update_water_height", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_4fort_7tsufort_7update_water_height, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_7tsunami_4fort_7tsufort_6update_water_height};
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_7update_water_height(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyArrayObject *__pyx_v_h = 0;
+  PyArrayObject *__pyx_v_u = 0;
+  double __pyx_v_dx;
+  double __pyx_v_dt;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[4] = {0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("update_water_height (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_h,&__pyx_n_s_u,&__pyx_n_s_dx,&__pyx_n_s_dt,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_h)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 72, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_u)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 72, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("update_water_height", 1, 4, 4, 1); __PYX_ERR(1, 72, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_dx)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 72, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("update_water_height", 1, 4, 4, 2); __PYX_ERR(1, 72, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_dt)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 72, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("update_water_height", 1, 4, 4, 3); __PYX_ERR(1, 72, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update_water_height") < 0)) __PYX_ERR(1, 72, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 4)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+      values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+      values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+      values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
+    }
+    __pyx_v_h = ((PyArrayObject *)values[0]);
+    __pyx_v_u = ((PyArrayObject *)values[1]);
+    __pyx_v_dx = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dx == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 75, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 76, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("update_water_height", 1, 4, 4, __pyx_nargs); __PYX_ERR(1, 72, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("tsunami.fort.tsufort.update_water_height", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_h), __pyx_ptype_5numpy_ndarray, 1, "h", 0))) __PYX_ERR(1, 73, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_u), __pyx_ptype_5numpy_ndarray, 1, "u", 0))) __PYX_ERR(1, 74, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7tsunami_4fort_7tsufort_6update_water_height(__pyx_self, __pyx_v_h, __pyx_v_u, __pyx_v_dx, __pyx_v_dt);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_6update_water_height(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_h, PyArrayObject *__pyx_v_u, double __pyx_v_dx, double __pyx_v_dt) {
+  int __pyx_v_grid_size;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_h;
+  __Pyx_Buffer __pyx_pybuffer_h;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_u;
+  __Pyx_Buffer __pyx_pybuffer_u;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  npy_intp *__pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("update_water_height", 1);
+  __pyx_pybuffer_h.pybuffer.buf = NULL;
+  __pyx_pybuffer_h.refcount = 0;
+  __pyx_pybuffernd_h.data = NULL;
+  __pyx_pybuffernd_h.rcbuffer = &__pyx_pybuffer_h;
+  __pyx_pybuffer_u.pybuffer.buf = NULL;
+  __pyx_pybuffer_u.refcount = 0;
+  __pyx_pybuffernd_u.data = NULL;
+  __pyx_pybuffernd_u.rcbuffer = &__pyx_pybuffer_u;
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_h.rcbuffer->pybuffer, (PyObject*)__pyx_v_h, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) __PYX_ERR(1, 72, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_h.diminfo[0].strides = __pyx_pybuffernd_h.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_h.diminfo[0].shape = __pyx_pybuffernd_h.rcbuffer->pybuffer.shape[0];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_u.rcbuffer->pybuffer, (PyObject*)__pyx_v_u, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) __PYX_ERR(1, 72, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_u.diminfo[0].strides = __pyx_pybuffernd_u.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_u.diminfo[0].shape = __pyx_pybuffernd_u.rcbuffer->pybuffer.shape[0];
+
+  /* "tsunami/fort/tsufort.pyx":81
+ *     Update the water height using the shallow water equations.
+ *     '''
+ *     cdef int grid_size = h.shape[0]             # <<<<<<<<<<<<<<
+ *     f_update_water_height(&h[0], &u[0], &dx, &dt, &grid_size)
+ *     return h
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_h)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(1, 81, __pyx_L1_error)
+  __pyx_v_grid_size = (__pyx_t_1[0]);
+
+  /* "tsunami/fort/tsufort.pyx":82
+ *     '''
+ *     cdef int grid_size = h.shape[0]
+ *     f_update_water_height(&h[0], &u[0], &dx, &dt, &grid_size)             # <<<<<<<<<<<<<<
+ *     return h
+ * 
+ */
+  __pyx_t_2 = 0;
+  __pyx_t_3 = -1;
+  if (__pyx_t_2 < 0) {
+    __pyx_t_2 += __pyx_pybuffernd_h.diminfo[0].shape;
+    if (unlikely(__pyx_t_2 < 0)) __pyx_t_3 = 0;
+  } else if (unlikely(__pyx_t_2 >= __pyx_pybuffernd_h.diminfo[0].shape)) __pyx_t_3 = 0;
+  if (unlikely(__pyx_t_3 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_3);
+    __PYX_ERR(1, 82, __pyx_L1_error)
+  }
+  __pyx_t_4 = 0;
+  __pyx_t_3 = -1;
+  if (__pyx_t_4 < 0) {
+    __pyx_t_4 += __pyx_pybuffernd_u.diminfo[0].shape;
+    if (unlikely(__pyx_t_4 < 0)) __pyx_t_3 = 0;
+  } else if (unlikely(__pyx_t_4 >= __pyx_pybuffernd_u.diminfo[0].shape)) __pyx_t_3 = 0;
+  if (unlikely(__pyx_t_3 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_3);
+    __PYX_ERR(1, 82, __pyx_L1_error)
+  }
+  (void)(f_update_water_height((&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_h.rcbuffer->pybuffer.buf, __pyx_t_2, __pyx_pybuffernd_h.diminfo[0].strides))), (&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_u.rcbuffer->pybuffer.buf, __pyx_t_4, __pyx_pybuffernd_u.diminfo[0].strides))), (&__pyx_v_dx), (&__pyx_v_dt), (&__pyx_v_grid_size)));
+
+  /* "tsunami/fort/tsufort.pyx":83
+ *     cdef int grid_size = h.shape[0]
+ *     f_update_water_height(&h[0], &u[0], &dx, &dt, &grid_size)
+ *     return h             # <<<<<<<<<<<<<<
+ * 
+ * def update_water_velocity(
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_h);
+  __pyx_r = ((PyObject *)__pyx_v_h);
+  goto __pyx_L0;
+
+  /* "tsunami/fort/tsufort.pyx":72
+ *     return h
+ * 
+ * def update_water_height(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_u.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("tsunami.fort.tsufort.update_water_height", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_u.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "tsunami/fort/tsufort.pyx":85
+ *     return h
+ * 
+ * def update_water_velocity(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_9update_water_velocity(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+); /*proto*/
+PyDoc_STRVAR(__pyx_doc_7tsunami_4fort_7tsufort_8update_water_velocity, "\n    Update the water velocity using the shallow water equations.\n    ");
+static PyMethodDef __pyx_mdef_7tsunami_4fort_7tsufort_9update_water_velocity = {"update_water_velocity", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_7tsunami_4fort_7tsufort_9update_water_velocity, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_7tsunami_4fort_7tsufort_8update_water_velocity};
+static PyObject *__pyx_pw_7tsunami_4fort_7tsufort_9update_water_velocity(PyObject *__pyx_self, 
+#if CYTHON_METH_FASTCALL
+PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
+#else
+PyObject *__pyx_args, PyObject *__pyx_kwds
+#endif
+) {
+  PyArrayObject *__pyx_v_h = 0;
+  PyArrayObject *__pyx_v_u = 0;
+  double __pyx_v_dx;
+  double __pyx_v_dt;
+  #if !CYTHON_METH_FASTCALL
+  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
+  #endif
+  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
+  PyObject* values[4] = {0,0,0,0};
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("update_water_velocity (wrapper)", 0);
+  #if !CYTHON_METH_FASTCALL
+  #if CYTHON_ASSUME_SAFE_MACROS
+  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
+  #else
+  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
+  #endif
+  #endif
+  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
+  {
+    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_h,&__pyx_n_s_u,&__pyx_n_s_dx,&__pyx_n_s_dt,0};
+    if (__pyx_kwds) {
+      Py_ssize_t kw_args;
+      switch (__pyx_nargs) {
+        case  4: values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
+        CYTHON_FALLTHROUGH;
+        case  3: values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+        CYTHON_FALLTHROUGH;
+        case  2: values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+        CYTHON_FALLTHROUGH;
+        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+        CYTHON_FALLTHROUGH;
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
+      switch (__pyx_nargs) {
+        case  0:
+        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_h)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 85, __pyx_L3_error)
+        else goto __pyx_L5_argtuple_error;
+        CYTHON_FALLTHROUGH;
+        case  1:
+        if (likely((values[1] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_u)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 85, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("update_water_velocity", 1, 4, 4, 1); __PYX_ERR(1, 85, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  2:
+        if (likely((values[2] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_dx)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 85, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("update_water_velocity", 1, 4, 4, 2); __PYX_ERR(1, 85, __pyx_L3_error)
+        }
+        CYTHON_FALLTHROUGH;
+        case  3:
+        if (likely((values[3] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_dt)) != 0)) {
+          (void)__Pyx_Arg_NewRef_FASTCALL(values[3]);
+          kw_args--;
+        }
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(1, 85, __pyx_L3_error)
+        else {
+          __Pyx_RaiseArgtupleInvalid("update_water_velocity", 1, 4, 4, 3); __PYX_ERR(1, 85, __pyx_L3_error)
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        const Py_ssize_t kwd_pos_args = __pyx_nargs;
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "update_water_velocity") < 0)) __PYX_ERR(1, 85, __pyx_L3_error)
+      }
+    } else if (unlikely(__pyx_nargs != 4)) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
+      values[1] = __Pyx_Arg_FASTCALL(__pyx_args, 1);
+      values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
+      values[3] = __Pyx_Arg_FASTCALL(__pyx_args, 3);
+    }
+    __pyx_v_h = ((PyArrayObject *)values[0]);
+    __pyx_v_u = ((PyArrayObject *)values[1]);
+    __pyx_v_dx = __pyx_PyFloat_AsDouble(values[2]); if (unlikely((__pyx_v_dx == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 88, __pyx_L3_error)
+    __pyx_v_dt = __pyx_PyFloat_AsDouble(values[3]); if (unlikely((__pyx_v_dt == (double)-1) && PyErr_Occurred())) __PYX_ERR(1, 89, __pyx_L3_error)
+  }
+  goto __pyx_L6_skip;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("update_water_velocity", 1, 4, 4, __pyx_nargs); __PYX_ERR(1, 85, __pyx_L3_error)
+  __pyx_L6_skip:;
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L3_error:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_AddTraceback("tsunami.fort.tsufort.update_water_velocity", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_h), __pyx_ptype_5numpy_ndarray, 1, "h", 0))) __PYX_ERR(1, 86, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_u), __pyx_ptype_5numpy_ndarray, 1, "u", 0))) __PYX_ERR(1, 87, __pyx_L1_error)
+  __pyx_r = __pyx_pf_7tsunami_4fort_7tsufort_8update_water_velocity(__pyx_self, __pyx_v_h, __pyx_v_u, __pyx_v_dx, __pyx_v_dt);
+
+  /* function exit code */
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __pyx_r = NULL;
+  __pyx_L0:;
+  {
+    Py_ssize_t __pyx_temp;
+    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
+      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
+    }
+  }
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7tsunami_4fort_7tsufort_8update_water_velocity(CYTHON_UNUSED PyObject *__pyx_self, PyArrayObject *__pyx_v_h, PyArrayObject *__pyx_v_u, double __pyx_v_dx, double __pyx_v_dt) {
+  int __pyx_v_grid_size;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_h;
+  __Pyx_Buffer __pyx_pybuffer_h;
+  __Pyx_LocalBuf_ND __pyx_pybuffernd_u;
+  __Pyx_Buffer __pyx_pybuffer_u;
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  npy_intp *__pyx_t_1;
+  Py_ssize_t __pyx_t_2;
+  int __pyx_t_3;
+  Py_ssize_t __pyx_t_4;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("update_water_velocity", 1);
+  __pyx_pybuffer_h.pybuffer.buf = NULL;
+  __pyx_pybuffer_h.refcount = 0;
+  __pyx_pybuffernd_h.data = NULL;
+  __pyx_pybuffernd_h.rcbuffer = &__pyx_pybuffer_h;
+  __pyx_pybuffer_u.pybuffer.buf = NULL;
+  __pyx_pybuffer_u.refcount = 0;
+  __pyx_pybuffernd_u.data = NULL;
+  __pyx_pybuffernd_u.rcbuffer = &__pyx_pybuffer_u;
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_h.rcbuffer->pybuffer, (PyObject*)__pyx_v_h, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) __PYX_ERR(1, 85, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_h.diminfo[0].strides = __pyx_pybuffernd_h.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_h.diminfo[0].shape = __pyx_pybuffernd_h.rcbuffer->pybuffer.shape[0];
+  {
+    __Pyx_BufFmt_StackElem __pyx_stack[1];
+    if (unlikely(__Pyx_GetBufferAndValidate(&__pyx_pybuffernd_u.rcbuffer->pybuffer, (PyObject*)__pyx_v_u, &__Pyx_TypeInfo_double, PyBUF_FORMAT| PyBUF_F_CONTIGUOUS, 1, 0, __pyx_stack) == -1)) __PYX_ERR(1, 85, __pyx_L1_error)
+  }
+  __pyx_pybuffernd_u.diminfo[0].strides = __pyx_pybuffernd_u.rcbuffer->pybuffer.strides[0]; __pyx_pybuffernd_u.diminfo[0].shape = __pyx_pybuffernd_u.rcbuffer->pybuffer.shape[0];
+
+  /* "tsunami/fort/tsufort.pyx":94
+ *     Update the water velocity using the shallow water equations.
+ *     '''
+ *     cdef int grid_size = h.shape[0]             # <<<<<<<<<<<<<<
+ *     f_update_water_velocity(&h[0], &u[0], &dx, &dt, &grid_size)
+ *     return u
+ */
+  __pyx_t_1 = __pyx_f_5numpy_7ndarray_5shape_shape(((PyArrayObject *)__pyx_v_h)); if (unlikely(__pyx_t_1 == ((npy_intp *)NULL) && PyErr_Occurred())) __PYX_ERR(1, 94, __pyx_L1_error)
+  __pyx_v_grid_size = (__pyx_t_1[0]);
+
+  /* "tsunami/fort/tsufort.pyx":95
+ *     '''
+ *     cdef int grid_size = h.shape[0]
+ *     f_update_water_velocity(&h[0], &u[0], &dx, &dt, &grid_size)             # <<<<<<<<<<<<<<
+ *     return u
+ */
+  __pyx_t_2 = 0;
+  __pyx_t_3 = -1;
+  if (__pyx_t_2 < 0) {
+    __pyx_t_2 += __pyx_pybuffernd_h.diminfo[0].shape;
+    if (unlikely(__pyx_t_2 < 0)) __pyx_t_3 = 0;
+  } else if (unlikely(__pyx_t_2 >= __pyx_pybuffernd_h.diminfo[0].shape)) __pyx_t_3 = 0;
+  if (unlikely(__pyx_t_3 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_3);
+    __PYX_ERR(1, 95, __pyx_L1_error)
+  }
+  __pyx_t_4 = 0;
+  __pyx_t_3 = -1;
+  if (__pyx_t_4 < 0) {
+    __pyx_t_4 += __pyx_pybuffernd_u.diminfo[0].shape;
+    if (unlikely(__pyx_t_4 < 0)) __pyx_t_3 = 0;
+  } else if (unlikely(__pyx_t_4 >= __pyx_pybuffernd_u.diminfo[0].shape)) __pyx_t_3 = 0;
+  if (unlikely(__pyx_t_3 != -1)) {
+    __Pyx_RaiseBufferIndexError(__pyx_t_3);
+    __PYX_ERR(1, 95, __pyx_L1_error)
+  }
+  (void)(f_update_water_velocity((&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_h.rcbuffer->pybuffer.buf, __pyx_t_2, __pyx_pybuffernd_h.diminfo[0].strides))), (&(*__Pyx_BufPtrFortranContig1d(double *, __pyx_pybuffernd_u.rcbuffer->pybuffer.buf, __pyx_t_4, __pyx_pybuffernd_u.diminfo[0].strides))), (&__pyx_v_dx), (&__pyx_v_dt), (&__pyx_v_grid_size)));
+
+  /* "tsunami/fort/tsufort.pyx":96
+ *     cdef int grid_size = h.shape[0]
+ *     f_update_water_velocity(&h[0], &u[0], &dx, &dt, &grid_size)
+ *     return u             # <<<<<<<<<<<<<<
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __Pyx_INCREF((PyObject *)__pyx_v_u);
+  __pyx_r = ((PyObject *)__pyx_v_u);
+  goto __pyx_L0;
+
+  /* "tsunami/fort/tsufort.pyx":85
+ *     return h
+ * 
+ * def update_water_velocity(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  { PyObject *__pyx_type, *__pyx_value, *__pyx_tb;
+    __Pyx_PyThreadState_declare
+    __Pyx_PyThreadState_assign
+    __Pyx_ErrFetch(&__pyx_type, &__pyx_value, &__pyx_tb);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
+    __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_u.rcbuffer->pybuffer);
+  __Pyx_ErrRestore(__pyx_type, __pyx_value, __pyx_tb);}
+  __Pyx_AddTraceback("tsunami.fort.tsufort.update_water_velocity", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  goto __pyx_L2;
+  __pyx_L0:;
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_h.rcbuffer->pybuffer);
+  __Pyx_SafeReleaseBuffer(&__pyx_pybuffernd_u.rcbuffer->pybuffer);
+  __pyx_L2:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
 static PyMethodDef __pyx_methods[] = {
   {0, 0, 0, 0}
 };
@@ -5009,7 +5580,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
   __Pyx_StringTabEntry __pyx_string_tab[] = {
     {&__pyx_n_s_F, __pyx_k_F, sizeof(__pyx_k_F), 0, 0, 1, 1},
     {&__pyx_n_s_ImportError, __pyx_k_ImportError, sizeof(__pyx_k_ImportError), 0, 0, 1, 1},
-    {&__pyx_n_s__10, __pyx_k__10, sizeof(__pyx_k__10), 0, 0, 1, 1},
+    {&__pyx_n_s__13, __pyx_k__13, sizeof(__pyx_k__13), 0, 0, 1, 1},
     {&__pyx_n_s__3, __pyx_k__3, sizeof(__pyx_k__3), 0, 0, 1, 1},
     {&__pyx_n_s_asyncio_coroutines, __pyx_k_asyncio_coroutines, sizeof(__pyx_k_asyncio_coroutines), 0, 0, 1, 1},
     {&__pyx_n_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 1},
@@ -5040,6 +5611,9 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
     {&__pyx_n_s_tsunami_fort_tsufort, __pyx_k_tsunami_fort_tsufort, sizeof(__pyx_k_tsunami_fort_tsufort), 0, 0, 1, 1},
     {&__pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_k_tsunami_fort_tsufort_pyx, sizeof(__pyx_k_tsunami_fort_tsufort_pyx), 0, 0, 1, 0},
+    {&__pyx_n_s_u, __pyx_k_u, sizeof(__pyx_k_u), 0, 0, 1, 1},
+    {&__pyx_n_s_update_water_height, __pyx_k_update_water_height, sizeof(__pyx_k_update_water_height), 0, 0, 1, 1},
+    {&__pyx_n_s_update_water_velocity, __pyx_k_update_water_velocity, sizeof(__pyx_k_update_water_velocity), 0, 0, 1, 1},
     {&__pyx_n_s_validate_sim_params, __pyx_k_validate_sim_params, sizeof(__pyx_k_validate_sim_params), 0, 0, 1, 1},
     {&__pyx_n_s_x, __pyx_k_x, sizeof(__pyx_k_x), 0, 0, 1, 1},
     {0, 0, 0, 0, 0, 0, 0}
@@ -5081,41 +5655,62 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__2);
   __Pyx_GIVEREF(__pyx_tuple__2);
 
-  /* "tsunami/fort/tsufort.pyx":47
+  /* "tsunami/fort/tsufort.pyx":49
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
  *     '''
  *     Validate the tsunami simulation parameters.
  */
-  __pyx_tuple__4 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_dt, __pyx_n_s_dx, __pyx_n_s_c); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_dt, __pyx_n_s_dx, __pyx_n_s_c); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
-  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_validate_sim_params, 47, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_codeobj__5 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__4, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_validate_sim_params, 49, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__5)) __PYX_ERR(1, 49, __pyx_L1_error)
 
-  /* "tsunami/fort/tsufort.pyx":53
+  /* "tsunami/fort/tsufort.pyx":55
  *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
  *     '''
  *     Compute the first derivative numerically using the central finite difference scheme.
  */
-  __pyx_tuple__6 = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_n, __pyx_n_s_dx); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(3, __pyx_n_s_x, __pyx_n_s_n, __pyx_n_s_dx); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
-  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_finite_diff_center, 53, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_codeobj__7 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__6, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_finite_diff_center, 55, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__7)) __PYX_ERR(1, 55, __pyx_L1_error)
 
-  /* "tsunami/fort/tsufort.pyx":62
+  /* "tsunami/fort/tsufort.pyx":64
  *     return dx
  * 
  * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
  *     '''
- *     Compute the first derivative numerically using the central finite difference scheme.
+ *     Initialize the simulation water height based on a Gauss shape.
  */
-  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_decay, __pyx_n_s_icenter, __pyx_n_s_h); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(4, __pyx_n_s_grid_size, __pyx_n_s_decay, __pyx_n_s_icenter, __pyx_n_s_h); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(1, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
-  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_gauss_init, 62, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_gauss_init, 64, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) __PYX_ERR(1, 64, __pyx_L1_error)
+
+  /* "tsunami/fort/tsufort.pyx":72
+ *     return h
+ * 
+ * def update_water_height(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+  __pyx_tuple__10 = PyTuple_Pack(5, __pyx_n_s_h, __pyx_n_s_u, __pyx_n_s_dx, __pyx_n_s_dt, __pyx_n_s_grid_size); if (unlikely(!__pyx_tuple__10)) __PYX_ERR(1, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__10);
+  __Pyx_GIVEREF(__pyx_tuple__10);
+  __pyx_codeobj__11 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_update_water_height, 72, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__11)) __PYX_ERR(1, 72, __pyx_L1_error)
+
+  /* "tsunami/fort/tsufort.pyx":85
+ *     return h
+ * 
+ * def update_water_velocity(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+  __pyx_codeobj__12 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__10, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_tsunami_fort_tsufort_pyx, __pyx_n_s_update_water_velocity, 85, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__12)) __PYX_ERR(1, 85, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -5548,40 +6143,64 @@ if (!__Pyx_RefNanny) {
   if (PyDict_SetItem(__pyx_d, __pyx_n_s_np, __pyx_t_2) < 0) __PYX_ERR(1, 1, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "tsunami/fort/tsufort.pyx":47
+  /* "tsunami/fort/tsufort.pyx":49
  * # #     return np.asfortranarray(h)
  * 
  * def validate_sim_params(int grid_size, double dt, double dx, double c):             # <<<<<<<<<<<<<<
  *     '''
  *     Validate the tsunami simulation parameters.
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_1validate_sim_params, 0, __pyx_n_s_validate_sim_params, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 47, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_1validate_sim_params, 0, __pyx_n_s_validate_sim_params, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__5)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_validate_sim_params, __pyx_t_2) < 0) __PYX_ERR(1, 47, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_validate_sim_params, __pyx_t_2) < 0) __PYX_ERR(1, 49, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "tsunami/fort/tsufort.pyx":53
+  /* "tsunami/fort/tsufort.pyx":55
  *     return f_validate_sim_params(&grid_size, &dt, &dx, &c)
  * 
  * def finite_diff_center(ndarray[dtype='double', ndim=1, mode='fortran'] x):             # <<<<<<<<<<<<<<
  *     '''
  *     Compute the first derivative numerically using the central finite difference scheme.
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_3finite_diff_center, 0, __pyx_n_s_finite_diff_center, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 53, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_3finite_diff_center, 0, __pyx_n_s_finite_diff_center, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__7)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_finite_diff_center, __pyx_t_2) < 0) __PYX_ERR(1, 53, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_finite_diff_center, __pyx_t_2) < 0) __PYX_ERR(1, 55, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "tsunami/fort/tsufort.pyx":62
+  /* "tsunami/fort/tsufort.pyx":64
  *     return dx
  * 
  * def gauss_init(int grid_size, double decay, int icenter):             # <<<<<<<<<<<<<<
  *     '''
- *     Compute the first derivative numerically using the central finite difference scheme.
+ *     Initialize the simulation water height based on a Gauss shape.
  */
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_5gauss_init, 0, __pyx_n_s_gauss_init, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 62, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_5gauss_init, 0, __pyx_n_s_gauss_init, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gauss_init, __pyx_t_2) < 0) __PYX_ERR(1, 62, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_gauss_init, __pyx_t_2) < 0) __PYX_ERR(1, 64, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "tsunami/fort/tsufort.pyx":72
+ *     return h
+ * 
+ * def update_water_height(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_7update_water_height, 0, __pyx_n_s_update_water_height, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__11)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 72, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_update_water_height, __pyx_t_2) < 0) __PYX_ERR(1, 72, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "tsunami/fort/tsufort.pyx":85
+ *     return h
+ * 
+ * def update_water_velocity(             # <<<<<<<<<<<<<<
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] h,
+ *     ndarray[dtype='double', ndim=1, mode='fortran'] u,
+ */
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_7tsunami_4fort_7tsufort_9update_water_velocity, 0, __pyx_n_s_update_water_velocity, NULL, __pyx_n_s_tsunami_fort_tsufort, __pyx_d, ((PyObject *)__pyx_codeobj__12)); if (unlikely(!__pyx_t_2)) __PYX_ERR(1, 85, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_update_water_velocity, __pyx_t_2) < 0) __PYX_ERR(1, 85, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "tsunami/fort/tsufort.pyx":1
@@ -9830,7 +10449,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__10);
+        name = __Pyx_NewRef(__pyx_n_s__13);
     }
     return name;
 }

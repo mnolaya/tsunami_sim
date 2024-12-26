@@ -16,6 +16,8 @@ cdef extern from 'tsufort.h':
     cdef bint f_validate_sim_params(int *grid_size, double *dt, double *dx, double *c)
     cdef double f_finite_diff_center(double *x, double *dx, int *n)
     cdef double f_gauss_init(int *grid_size, double *decay, int *icenter, double *h)
+    cdef double f_update_water_height(double *h, double *u, double *dx, double *dt, int *grid_size)
+    cdef double f_update_water_velocity(double *h, double *u, double *dx, double *dt, int *grid_size)
 
     # cdef void c_run_solver(int *icenter, int *grid_size, int *timesteps, double *dt, double *dx, double *c, double *decay, double *h)
 
@@ -66,3 +68,29 @@ def gauss_init(int grid_size, double decay, int icenter):
     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')
     f_gauss_init(&grid_size, &decay, &icenter, &h[0])
     return h
+
+def update_water_height(
+    ndarray[dtype='double', ndim=1, mode='fortran'] h,
+    ndarray[dtype='double', ndim=1, mode='fortran'] u,
+    double dx,
+    double dt,
+):
+    '''
+    Update the water height using the shallow water equations.
+    '''
+    cdef int grid_size = h.shape[0]
+    f_update_water_height(&h[0], &u[0], &dx, &dt, &grid_size)
+    return h
+
+def update_water_velocity(
+    ndarray[dtype='double', ndim=1, mode='fortran'] h,
+    ndarray[dtype='double', ndim=1, mode='fortran'] u,
+    double dx,
+    double dt,
+):
+    '''
+    Update the water velocity using the shallow water equations.
+    '''
+    cdef int grid_size = h.shape[0]
+    f_update_water_velocity(&h[0], &u[0], &dx, &dt, &grid_size)
+    return u
