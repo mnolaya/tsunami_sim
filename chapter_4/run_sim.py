@@ -1,6 +1,7 @@
 from attrs import define
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
 from tsunami.fort import tsufort
 
@@ -33,27 +34,36 @@ def main() -> None:
 
     # Add initial water height to plot
     xdata = np.arange(1, sim_params.grid_size + 1)
-    ax.plot(xdata, h, label='t = 0 sec')
+    l = ax.plot(xdata, h, label='t = 0 sec')[0]
+    anno = ax.annotate(f't = {0:.3f} sec', xy=(0.98, 0.95), xycoords='axes fraction', ha='right')
+    ax.set_xlabel('Distance [m]')
+    ax.set_ylabel('Water height [m]')
 
     # Create array of time point indices to plot at
     ti_plot = np.linspace(0, sim_params.num_tsteps, NPLOT + 1, dtype=int)
 
     # Run sim
     u = np.zeros((sim_params.grid_size,))
+    results = {'u': [u], 'h': [h], 't': [0]}
     for i in range(sim_params.num_tsteps):
         u = tsufort.update_water_velocity(h, u, sim_params.dx, sim_params.dt)
         h = tsufort.update_water_height(h, u, sim_params.dx, sim_params.dt)
 
-        # Plot at specified time points
-        t = i*sim_params.dt
-        if not np.any(i + 1 == ti_plot): continue
-        ax.plot(xdata, h, label=f't = {t:.2f} sec')
+        # Store results
+        results['u'].append(u)
+        results['h'].append(h)
+        results['t'].append(sim_params.dt*(i + 1))
 
-    # Style plot
-    ax.legend()
-    fig.tight_layout()
-    plt.show()
+    def animate_time_series(frame, line, anno, data, time):
+        anno.set_text(f't = {time[frame]:.3f} sec')
+        line.set_ydata(data[frame])
+        return [anno, line]
     
+    ani = animation.FuncAnimation(fig, func=animate_time_series, frames=len(results['h'])-1, fargs=[l, anno, results['h'], results['t']], interval=5)
+    plt.show()
+
+    # print(results['h'][0])
+    # print(results['h'][10])
 
 if __name__ == "__main__":
     main()
