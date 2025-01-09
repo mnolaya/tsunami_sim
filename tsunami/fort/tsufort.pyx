@@ -67,7 +67,7 @@ def gauss_init(int grid_size, double decay, int icenter):
     '''
     cdef ndarray[dtype='double', ndim=1, mode='fortran'] h = np.empty(grid_size, dtype='double', order='F')
     f_gauss_init(&grid_size, &decay, &icenter, &h[0])
-    return h
+    return h.copy()
 
 def update_water_height(
     ndarray[dtype='double', ndim=1, mode='fortran'] h,
@@ -80,7 +80,7 @@ def update_water_height(
     '''
     cdef int grid_size = h.shape[0]
     f_update_water_height(&h[0], &u[0], &dx, &dt, &grid_size)
-    return h
+    return h.copy()
 
 def update_water_velocity(
     ndarray[dtype='double', ndim=1, mode='fortran'] h,
@@ -93,4 +93,4 @@ def update_water_velocity(
     '''
     cdef int grid_size = h.shape[0]
     f_update_water_velocity(&h[0], &u[0], &dx, &dt, &grid_size)
-    return u
+    return u.copy()
